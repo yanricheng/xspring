@@ -209,8 +209,8 @@
                         <contextPath>/</contextPath>
                     </webApp>
                 </configuration>
-
             </plugin>
+
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>
