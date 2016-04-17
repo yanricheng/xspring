@@ -9,10 +9,20 @@
 
 	<context:property-placeholder location="classpath:spring.properties" />
 
+    <context:component-scan base-package="net.yanrc.xpring.ui.controllor" />
+    <context:component-scan base-package="net.yanrc.xpring.biz.api" />
+    <context:component-scan base-package="net.yanrc.xpring.biz.component" />
+
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
+    <annotation-driven>
+        <message-converters register-defaults="true">
+            <!--<beans:ref bean="stringHttpMessageConverter"/>-->
+            <beans:ref bean="mappingJackson2HttpMessageConverter"/>
+            <!--<beans:ref bean="mappingJackson2XmlHttpMessageConverter"/>-->
+        </message-converters>
+    </annotation-driven>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -22,9 +32,34 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	<context:component-scan base-package="net.yanrc.xpring" />
-	
-	
-	
+
+    <beans:bean id="mappingJackson2HttpMessageConverter"
+                class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <beans:property name="supportedMediaTypes">
+            <beans:list>
+                <beans:value>application/json;charset=UTF-8</beans:value>
+                <beans:value>text/html;charset=UTF-8</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="mappingJackson2XmlHttpMessageConverter"
+                class="org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter">
+        <beans:property name="supportedMediaTypes">
+            <beans:list>
+                <beans:value>application/xml;charset=UTF-8</beans:value>
+                <beans:value>text/xml;charset=UTF-8</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <beans:constructor-arg index="0" value="UTF-8"/>
+        <beans:property name="supportedMediaTypes">
+            <beans:list>
+                <beans:value>text/plain;charset=UTF-8</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
 </beans:beans>

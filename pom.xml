@@ -55,9 +55,17 @@
         <java-version>1.6</java-version>
         <org.springframework-version>4.2.5.RELEASE</org.springframework-version>
         <org.aspectj-version>1.6.10</org.aspectj-version>
-        <org.slf4j-version>1.6.6</org.slf4j-version>
+        <org.slf4j-version>1.7.21</org.slf4j-version>
+        <faster.jackson>2.7.3</faster.jackson>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>net.yanrc.web</groupId>
+            <artifactId>yanrc_common</artifactId>
+            <version>1.0.31</version>
+        </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -159,6 +167,28 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
+        </dependency>
+
+        <!-- 集成jackson-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${faster.jackson}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${faster.jackson}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${faster.jackson}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>${faster.jackson}</version>
         </dependency>
 
         <!-- Test -->
