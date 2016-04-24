@@ -63,7 +63,7 @@
         <dependency>
             <groupId>net.yanrc.web</groupId>
             <artifactId>yanrc_common</artifactId>
-            <version>1.0.31</version>
+            <version>1.0.32</version>
         </dependency>
 
         <!-- Spring -->
@@ -221,7 +221,7 @@
                 <version>2.1</version>
                 <configuration>
                     <path>/</path>
-                    <port>80</port>
+                    <port>8080</port>
                     <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
@@ -232,7 +232,7 @@
                 <version>9.2.10.v20150310</version>
                 <configuration>
                     <httpConnector>
-                        <port>80</port>
+                        <port>8080</port>
                     </httpConnector>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
