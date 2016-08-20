@@ -52,13 +52,28 @@
     </profiles>
 
     <properties>
-        <java-version>1.6</java-version>
+        <java-version>1.8</java-version>
         <org.springframework-version>4.2.5.RELEASE</org.springframework-version>
         <org.aspectj-version>1.6.10</org.aspectj-version>
         <org.slf4j-version>1.7.21</org.slf4j-version>
         <faster.jackson>2.7.3</faster.jackson>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-releasetrain</artifactId>
+            <version>Fowler-SR2</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>1.4.0.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
 
         <dependency>
             <groupId>net.yanrc.web</groupId>
@@ -200,7 +215,7 @@
         </dependency>
     </dependencies>
     <build>
-       <finalName>xpring</finalName>
+        <finalName>xpring</finalName>
 
         <resources>
             <resource>
@@ -215,6 +230,10 @@
         </resources>
 
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
