@@ -1,33 +1,25 @@
 package net.yanrc.xpring.ui.controllor;
 
-import com.google.common.collect.Sets;
 import net.yanrc.app.common.api.ApiResponse;
 import net.yanrc.app.common.result.DefaultResult;
-import net.yanrc.app.common.result.Result;
 import net.yanrc.app.common.util.JsonUtils;
-import net.yanrc.app.common.util.UUIDGenerator;
 import net.yanrc.xpring.biz.api.UserBizApi;
 import net.yanrc.xpring.common.utils.XRequestParam;
-import net.yanrc.xpring.data.dto.UserDto;
+import net.yanrc.xpring.data.dto.UserQueryDto;
 import net.yanrc.xpring.data.model.User;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.IdGenerator;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
-import java.text.DateFormat;
 import java.util.*;
 
 /**
@@ -41,6 +33,24 @@ public class UserControllor {
     private static final Logger logger = LoggerFactory.getLogger(UserControllor.class);
     @Autowired
     private UserBizApi userBizApi;
+
+    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
+    @ResponseBody
+    public String add(@RequestParam(required = true, name = "id") int id) {
+        return JsonUtils.fromObject(userBizApi.add());
+    }
+
+    @RequestMapping(value = "/user/remove", method = RequestMethod.GET)
+    @ResponseBody
+    public String remove(@RequestParam(required = true, name = "id") int id) {
+        return JsonUtils.fromObject(userBizApi.removeById(id));
+    }
+
+    @RequestMapping(value = "/user/get", method = RequestMethod.GET)
+    @ResponseBody
+    public String getUser(@RequestParam(required = true, name = "id") int id) {
+        return JsonUtils.fromObject(userBizApi.getById(id));
+    }
 
     @RequestMapping(value = "/user/save", method = RequestMethod.GET)
     public String saveUserPage(ModelMap resultModel) {
@@ -70,11 +80,11 @@ public class UserControllor {
 //            @XRequestParam(required = true, name = "myschool", defaultValue = "yanrc") ArrayList<String> xschools
 
     ) throws InvocationTargetException, IllegalAccessException {
-        UserDto userDto = new UserDto();
-        userDto.setName(userName);
+        UserQueryDto userQueryDto = new UserQueryDto();
+        userQueryDto.setName(userName);
 
         User user = new User();
-        BeanUtils.copyProperties(user, userDto);
+        BeanUtils.copyProperties(user, userQueryDto);
         user.setId(100);
 
         return new ApiResponse(new DefaultResult<User>(user));

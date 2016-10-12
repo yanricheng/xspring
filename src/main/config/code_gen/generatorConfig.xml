@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry
+		location="~/mysql-connector-java-5.1.34.jar" />
+
+	<context id="mysqlTables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+			<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+						connectionURL="jdbc:mysql://10.241.0.196:3306/xspring?rewriteBatchedStatements=true"
+						userId="root" password="mysql">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- generate Model -->
+		<javaModelGenerator targetPackage="com.netease.acs.common.entity"
+			targetProject="/home/yanricheng/projects/mybatisgen/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- generate xml -->
+		<sqlMapGenerator targetPackage="com.netease.acs.server.dao.mapper"
+			targetProject="/home/yanricheng/projects/mybatisgen/src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- generate Mapper -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.netease.acs.server.dao.mapper"
+			targetProject="/home/yanricheng/projects/mybatisgen/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+		
+		<table schema="" 
+			tableName="act_post"
+			domainObjectName="actPost"
+
+			enableCountByExample="false" 
+			enableUpdateByExample="false"
+			enableDeleteByExample="false" 
+			enableSelectByExample="false"
+			enableUpdateByPrimaryKey="true" 
+			enableDeleteByPrimaryKey="true"
+			selectByPrimaryKeyQueryId="false" 
+			selectByExampleQueryId="false"
+			/>
+			
+			
+			
+
+	</context>
+</generatorConfiguration>
