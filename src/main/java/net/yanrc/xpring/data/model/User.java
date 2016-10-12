@@ -13,6 +13,18 @@ public class User {
     private String mobile;
     private String email;
 
+    public User() {
+
+    }
+
+    public User(Integer id, String name, String password, String mobile, String email) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.mobile = mobile;
+        this.email = email;
+    }
+
     public Integer getId() {
         return id;
     }

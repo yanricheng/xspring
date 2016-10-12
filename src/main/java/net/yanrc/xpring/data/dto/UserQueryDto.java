@@ -1,4 +1,4 @@
-package net.yanrc.xpring.data.entity;
+package net.yanrc.xpring.data.dto;
 
 import net.yanrc.xpring.data.model.User;
 
@@ -8,6 +8,6 @@ import net.yanrc.xpring.data.model.User;
  * @auther hzyanricheng
  * @create 2016-04-16 10:08
  */
-public class UserEntity extends User {
+public class UserQueryDto extends User {
 
 }
