@@ -1,23 +1,23 @@
-package net.yanrc.xpring.data.model;
+package net.yanrc.xpring.rpc.model;
 
 /**
- * User
+ * UserModel
  *
  * @auther hzyanricheng
  * @create 2016-04-16 16:29
  */
-public class User {
+public class UserModel {
     private Integer id;
     private String name;
     private String password;
     private String mobile;
     private String email;
 
-    public User() {
+    public UserModel() {
 
     }
 
-    public User(Integer id, String name, String password, String mobile, String email) {
+    public UserModel(Integer id, String name, String password, String mobile, String email) {
         this.id = id;
         this.name = name;
         this.password = password;

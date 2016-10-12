@@ -53,6 +53,7 @@
 
     <properties>
         <java-version>1.8</java-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework-version>4.2.5.RELEASE</org.springframework-version>
         <org.aspectj-version>1.6.10</org.aspectj-version>
         <org.slf4j-version>1.7.21</org.slf4j-version>
@@ -245,20 +246,20 @@
                 </configuration>
             </plugin>
 
-           <!-- <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.10.v20150310</version>
-                <configuration>
-                    <httpConnector>
-                        <port>8080</port>
-                    </httpConnector>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <webApp>
-                        <contextPath>/</contextPath>
-                    </webApp>
-                </configuration>
-            </plugin>-->
+            <!-- <plugin>
+                 <groupId>org.eclipse.jetty</groupId>
+                 <artifactId>jetty-maven-plugin</artifactId>
+                 <version>9.2.10.v20150310</version>
+                 <configuration>
+                     <httpConnector>
+                         <port>8080</port>
+                     </httpConnector>
+                     <scanIntervalSeconds>10</scanIntervalSeconds>
+                     <webApp>
+                         <contextPath>/</contextPath>
+                     </webApp>
+                 </configuration>
+             </plugin>-->
 
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -274,13 +275,24 @@
                     <downloadJavadocs>true</downloadJavadocs>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>utf-8</encoding>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
@@ -293,24 +305,6 @@
                 <configuration>
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <executions>
-                    <execution>
-                        <id>Generate MyBatis Artifacts</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <configurationFile>src/main/config/code_gen/generatorConfig.xml</configurationFile>
-                            <overwrite>true</overwrite>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

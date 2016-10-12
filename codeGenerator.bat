@@ -1,0 +1,1 @@
+mvn -f codeGeneratorPom.xml mybatis-generator:generate

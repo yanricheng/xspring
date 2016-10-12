@@ -1,12 +1,12 @@
-package net.yanrc.xpring.ui.controllor;
+package net.yanrc.xpring.web.controllor;
 
 import net.yanrc.app.common.api.ApiResponse;
 import net.yanrc.app.common.result.DefaultResult;
 import net.yanrc.app.common.util.JsonUtils;
-import net.yanrc.xpring.biz.api.UserBizApi;
+import net.yanrc.xpring.web.biz.UserBizService;
 import net.yanrc.xpring.common.utils.XRequestParam;
-import net.yanrc.xpring.data.dto.UserQueryDto;
-import net.yanrc.xpring.data.model.User;
+import net.yanrc.xpring.rpc.dto.query.UserQueryDto;
+import net.yanrc.xpring.rpc.model.UserModel;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ import java.util.*;
 public class UserControllor {
     private static final Logger logger = LoggerFactory.getLogger(UserControllor.class);
     @Autowired
-    private UserBizApi userBizApi;
+    private UserBizService userBizApi;
 
     @RequestMapping(value = "/user/add", method = RequestMethod.GET)
     @ResponseBody
@@ -83,11 +83,11 @@ public class UserControllor {
         UserQueryDto userQueryDto = new UserQueryDto();
         userQueryDto.setName(userName);
 
-        User user = new User();
+        UserModel user = new UserModel();
         BeanUtils.copyProperties(user, userQueryDto);
         user.setId(100);
 
-        return new ApiResponse(new DefaultResult<User>(user));
+        return new ApiResponse(new DefaultResult<UserModel>(user));
     }
 
     static final String key = "c_yanrc";
@@ -97,7 +97,7 @@ public class UserControllor {
     public ApiResponse voteMzzdyPost(@CookieValue(value = key, required = false) String voteCookie,
                                      HttpServletRequest request, HttpServletResponse response) {
 
-        System.out.println(JsonUtils.fromObject((request.getHeader("User-Agent"))));
+        System.out.println(JsonUtils.fromObject((request.getHeader("UserModel-Agent"))));
 
         if (StringUtils.isBlank(voteCookie)) {
             voteCookie = new Date().toString();

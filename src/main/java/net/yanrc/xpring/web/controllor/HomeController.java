@@ -1,4 +1,4 @@
-package net.yanrc.xpring.ui.controllor;
+package net.yanrc.xpring.web.controllor;
 
 import java.text.DateFormat;
 import java.util.Date;

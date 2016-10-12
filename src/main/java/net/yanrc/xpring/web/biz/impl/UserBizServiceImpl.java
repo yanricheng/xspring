@@ -1,9 +1,9 @@
-package net.yanrc.xpring.biz.api.Impl;
+package net.yanrc.xpring.web.biz.impl;
 
 import net.yanrc.app.common.util.StTimeUtils;
-import net.yanrc.xpring.biz.api.UserBizApi;
-import net.yanrc.xpring.data.dto.UserQueryDto;
-import net.yanrc.xpring.data.model.User;
+import net.yanrc.xpring.web.biz.UserBizService;
+import net.yanrc.xpring.rpc.dto.query.UserQueryDto;
+import net.yanrc.xpring.rpc.model.UserModel;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -18,7 +18,7 @@ import java.util.Date;
  * @create 2016-04-16 10:18
  */
 @Service
-public class UserBizApiImpl implements UserBizApi {
+public class UserBizServiceImpl implements UserBizService {
     @Override
     public boolean save(UserQueryDto userQueryDto){
         System.out.println("保存成功"+ userQueryDto.getName());
@@ -26,13 +26,13 @@ public class UserBizApiImpl implements UserBizApi {
     }
 
     @Cacheable(value = "default",key = "#id")
-    public User getById(Integer id){
+    public UserModel getById(Integer id){
         System.out.println("get from db...");
         return null;
     }
 
-    User createUser(){
-        User user = new User();
+    UserModel createUser(){
+        UserModel user = new UserModel();
         user.setId(Integer.parseInt(StTimeUtils.formatYYYYMMDD(new Date())));
         user.setName(new Date().toLocaleString());
         return user;
@@ -40,7 +40,7 @@ public class UserBizApiImpl implements UserBizApi {
 
     @Override
     @CachePut(value = "default",key = "#result.id")
-    public User add() {
+    public UserModel add() {
         return createUser();
     }
 
@@ -52,7 +52,7 @@ public class UserBizApiImpl implements UserBizApi {
 
     @Override
     @CachePut(value = "default",key = "#result.id")
-    public boolean edit(User user) {
+    public boolean edit(UserModel user) {
         return false;
     }
 }
