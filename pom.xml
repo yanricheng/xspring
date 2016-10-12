@@ -226,7 +226,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+           <!-- <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.2.10.v20150310</version>
@@ -239,7 +239,7 @@
                         <contextPath>/</contextPath>
                     </webApp>
                 </configuration>
-            </plugin>
+            </plugin>-->
 
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
