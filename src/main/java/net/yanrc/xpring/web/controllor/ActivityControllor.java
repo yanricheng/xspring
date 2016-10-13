@@ -62,7 +62,7 @@ public class ActivityControllor {
     public String edit(@RequestParam(required = true, name = "id") int id) {
         Activity activity = new Activity();
         activity.setId(id);
-        activity.setName(activity.getName() + new Date().toLocaleString());
+        activity.setName(new Date().toLocaleString());
         Result<Activity> newActivityResult = activityBizService.editByIdSelective(activity);
         if (newActivityResult.isSuccess()) {
             return JsonUtils.fromObject(new ApiResponse<Activity>(newActivityResult));
