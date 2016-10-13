@@ -27,8 +27,8 @@
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		<!-- generate xml -->
-		<sqlMapGenerator targetPackage="net.yanrc.xpring.dal.mapper"
-			targetProject="src\main\java"> <!--src\main\resources-->
+		<sqlMapGenerator targetPackage="mybatis.mapper"
+			targetProject="src\main\resources"> <!--src\main\resources-->
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- generate Mapper -->

@@ -15,21 +15,13 @@
     <result column="last_editor" property="lastEditor" jdbcType="VARCHAR" />
     <result column="last_edit_time" property="lastEditTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     id, type, is_delete, status, title, name, start_time, end_time, creator, create_time, 
     last_editor, last_edit_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 'false' as QUERYID,
-    <include refid="Base_Column_List" />
-    from activity
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from activity
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="net.yanrc.xpring.dal.entity.Activity" >
+
+  <insert id="insert" parameterType="net.yanrc.xpring.dal.entity.Activity" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
     insert into activity (id, type, is_delete, 
       status, title, name, 
       start_time, end_time, creator, 
@@ -41,7 +33,8 @@
       #{createTime,jdbcType=TIMESTAMP}, #{lastEditor,jdbcType=VARCHAR}, #{lastEditTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.entity.Activity" >
+
+  <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.entity.Activity"  useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
     insert into activity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -120,7 +113,14 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="net.yanrc.xpring.dal.entity.Activity" >
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from activity
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="net.yanrc.xpring.dal.entity.Activity" >
     update activity
     <set >
       <if test="type != null" >
@@ -159,6 +159,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="net.yanrc.xpring.dal.entity.Activity" >
     update activity
     set type = #{type,jdbcType=INTEGER},
@@ -174,4 +175,11 @@
       last_edit_time = #{lastEditTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 'false' as QUERYID,
+        <include refid="Base_Column_List" />
+        from activity
+        where id = #{id,jdbcType=INTEGER}
+    </select>
 </mapper>
