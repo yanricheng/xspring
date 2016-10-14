@@ -59,4 +59,9 @@ public class ActivityManagerImpl implements net.yanrc.xpring.rpc.manger.Activity
         return activityMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public Activity getActById(Integer id) {
+        return activityMapper.selectByPrimaryKey(id);
+    }
+
 }

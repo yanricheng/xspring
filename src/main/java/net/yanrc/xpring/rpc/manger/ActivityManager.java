@@ -24,6 +24,10 @@ public interface ActivityManager {
     @CachePut(value = "default", key = "#p0.id")
     Activity editByIdSelective(Activity activity);
 
-    @Cacheable(value = "default", key = "#p0")
+//    @Cacheable(value = "default", key = "#p0")
+     @Cacheable(value = "activity", key = "#id.toString()")
     Activity getById(Integer id);
+
+    @Cacheable(value = "act", key = "#id.toString()")
+    Activity getActById(Integer id);
 }

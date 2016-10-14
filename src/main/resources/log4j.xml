@@ -30,7 +30,7 @@
 
 	<logger name="org.springframework.web">
 		<level value="info" />
-	</logger>
+	</logger> -->
 
 	<logger name="java.sql.Connection">
 		<level value="DEBUG" />
@@ -44,11 +44,11 @@
 
 	<logger name="net.yanrc.xpring.dal.mapper">
 		<level value="DEBUG" />
-	</logger>-->
+	</logger>
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="DEBUG" />
+		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
 	
