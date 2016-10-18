@@ -43,7 +43,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Result<Activity> getById(Integer id) {
-        activityManager.getById(id);
-        return new DefaultResult<Activity>(activityManager.getActById(id));
+//        activityManager.getById(id);
+        return new DefaultResult<Activity>(activityManager.getById(id));
     }
 }

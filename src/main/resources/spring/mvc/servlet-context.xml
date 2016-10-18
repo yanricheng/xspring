@@ -35,10 +35,10 @@
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
         <property name="usePrefix" value="true" />
-        <property name="defaultExpiration" value="216000000"/><!-- 1小时 -->
+        <property name="defaultExpiration" value="216000"/><!-- 1小时 -->
         <property name="expires">
             <map>
-                <entry key="act" value="60000"/>
+                <entry key="act" value="60"/>
             </map>
         </property>
     </bean>
