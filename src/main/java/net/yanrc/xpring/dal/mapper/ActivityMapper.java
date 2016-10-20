@@ -2,6 +2,8 @@ package net.yanrc.xpring.dal.mapper;
 
 import net.yanrc.xpring.dal.entity.Activity;
 
+import java.util.List;
+
 public interface ActivityMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -10,6 +12,8 @@ public interface ActivityMapper {
     int insertSelective(Activity record);
 
     Activity selectByPrimaryKey(Integer id);
+
+    List<Activity> selectAll();
 
     int updateByPrimaryKeySelective(Activity record);
 

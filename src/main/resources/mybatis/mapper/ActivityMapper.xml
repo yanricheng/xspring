@@ -182,4 +182,10 @@
         from activity
         where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 'false' as QUERYID,
+        <include refid="Base_Column_List" />
+        from activity
+    </select>
 </mapper>

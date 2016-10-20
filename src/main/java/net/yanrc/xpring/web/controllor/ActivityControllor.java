@@ -77,9 +77,9 @@ public class ActivityControllor {
     @RequestMapping(value = "/act/get", method = RequestMethod.GET)
     @ResponseBody
     public String get(@RequestParam(required = true, name = "id") int id,
-                      @RequestParam(required = true, name = "name") String name,
+                      @RequestParam(required = false, name = "name") String name,
                       HttpServletRequest request) throws UnsupportedEncodingException {
-        String str= new String(request.getParameter("name").toString().getBytes("iso8859_1"), "UTF-8");
+//        String str= new String(request.getParameter("name").toString().getBytes("iso8859_1"), "UTF-8");
         Result<Activity> activityResult = activityBizService.getById(id);
         if (activityResult.isSuccess()) {
             return JsonUtils.fromObject(new ApiResponse<Activity>(activityResult));

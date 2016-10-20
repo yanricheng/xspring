@@ -8,12 +8,16 @@ import net.yanrc.xpring.rpc.manger.ActivityManager;
 import net.yanrc.xpring.rpc.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/10/13.
  */
 @Service
 public class ActivityServiceImpl implements ActivityService {
+
     @Autowired
     private ActivityManager activityManager;
 
@@ -41,9 +45,10 @@ public class ActivityServiceImpl implements ActivityService {
         return new DefaultResult<>(MessageEnum.db_error.message());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Result<Activity> getById(Integer id) {
-//        activityManager.getById(id);
-        return new DefaultResult<Activity>(activityManager.getById(id));
+        List<Activity> activityList = activityManager.getAll();
+        return new DefaultResult<Activity>(activityManager.getActById(id));
     }
 }
