@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2016/10/13.
  */
@@ -48,7 +46,7 @@ public class ActivityServiceImpl implements ActivityService {
     @Transactional(readOnly = true)
     @Override
     public Result<Activity> getById(Integer id) {
-        List<Activity> activityList = activityManager.getAll();
+//        List<Activity> activityList = activityManager.getAll();
         return new DefaultResult<Activity>(activityManager.getActById(id));
     }
 }

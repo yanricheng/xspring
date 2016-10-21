@@ -31,7 +31,8 @@
     <context:annotation-config/>
 
     <!-- 通用缓存处理-->
-    <cache:annotation-driven />
+    <cache:annotation-driven  error-handler="errorHandler"/>
+    <bean id="errorHandler" class="net.yanrc.xpring.common.utils.cache.FixedCacheErrorHandler" />
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
         <property name="usePrefix" value="true" />
