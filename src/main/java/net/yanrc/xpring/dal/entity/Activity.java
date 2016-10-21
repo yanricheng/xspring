@@ -2,6 +2,7 @@ package net.yanrc.xpring.dal.entity;
 
 import java.util.Date;
 
+//@JsonIgnoreProperties(value = {"idx"})
 public class Activity {
     private Integer id;
 
