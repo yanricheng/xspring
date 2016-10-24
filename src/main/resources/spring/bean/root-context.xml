@@ -5,4 +5,24 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
+	<bean id="logBeforeAdvice"
+		  class="net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice"/>
+
+	<bean id="helloSpeaker"
+		  class="net.yanrc.xpring.web.biz.service.demo.HelloSpeaker"/>
+
+	<bean id="helloSpeakerBean"
+		  class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice</value>
+		</property>
+		<property name="target">
+			<ref bean="helloSpeaker"/>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>logBeforeAdvice</value>
+			</list>
+		</property>
+	</bean>
 </beans>
