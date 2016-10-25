@@ -1,5 +1,6 @@
 package net.yanrc.xpring.rpc.manger;
 
+import net.yanrc.xpring.common.utils.anots.Logable;
 import net.yanrc.xpring.dal.entity.Activity;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public interface ActivityManager {
 
     Activity getById(Integer id);
 
+    @Logable()
     Activity getActById(Integer id);
 
     List<Activity> getAll();

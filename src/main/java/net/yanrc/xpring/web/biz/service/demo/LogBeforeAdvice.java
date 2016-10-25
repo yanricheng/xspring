@@ -14,6 +14,6 @@ public class LogBeforeAdvice implements MethodBeforeAdvice {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     public void before(Method method, Object[] args, Object target) throws Throwable {
-        logger.info("LogBeforeAdvice starts..." + method);
+        logger.info("\n LogBeforeAdvice starts...,   {}", method);
     }
 }

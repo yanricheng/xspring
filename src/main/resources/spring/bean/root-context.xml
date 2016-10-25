@@ -5,7 +5,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-	<bean id="logBeforeAdvice"
+	<!--<bean id="logBeforeAdvice"
 		  class="net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice"/>
 
 	<bean id="helloSpeaker"
@@ -24,5 +24,5 @@
 				<value>logBeforeAdvice</value>
 			</list>
 		</property>
-	</bean>
+	</bean>-->
 </beans>

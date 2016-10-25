@@ -1,6 +1,7 @@
 package net.yanrc.xpring.rpc.service;
 
 import net.yanrc.app.common.result.Result;
+import net.yanrc.xpring.common.utils.anots.Logable;
 import net.yanrc.xpring.dal.entity.Activity;
 
 /**
@@ -11,5 +12,7 @@ public interface ActivityService {
     Result<Activity> addSelective(Activity activity);
     Result<Boolean> remove(Integer id);
     Result<Activity> editByIdSelective(Activity activity);
+
+    @Logable()
     Result<Activity> getById(Integer id);
 }

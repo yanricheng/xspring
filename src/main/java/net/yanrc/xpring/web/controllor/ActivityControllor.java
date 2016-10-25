@@ -4,6 +4,7 @@ import net.yanrc.app.common.api.ApiResponse;
 import net.yanrc.app.common.api.HeadEnum;
 import net.yanrc.app.common.result.Result;
 import net.yanrc.app.common.util.JsonUtils;
+import net.yanrc.xpring.common.utils.anots.Logable;
 import net.yanrc.xpring.dal.entity.Activity;
 import net.yanrc.xpring.web.biz.service.ActivityBizService;
 import org.slf4j.Logger;
@@ -74,6 +75,7 @@ public class ActivityControllor {
         return JsonUtils.fromObject(new ApiResponse<Activity>(HeadEnum.SERVER_ERROR.newHead()));
     }
 
+    @Logable(start=true,end = false)
     @RequestMapping(value = "/act/get", method = RequestMethod.GET)
     @ResponseBody
     public String get(@RequestParam(required = true, name = "id") int id,

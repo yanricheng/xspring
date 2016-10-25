@@ -1,6 +1,7 @@
 package net.yanrc.xpring.web.biz.service;
 
 import net.yanrc.app.common.result.Result;
+import net.yanrc.xpring.common.utils.anots.Logable;
 import net.yanrc.xpring.dal.entity.Activity;
 import net.yanrc.xpring.rpc.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class ActivityBizService {
         return activityService.editByIdSelective(activity);
     }
 
+    @Logable
     public Result<Activity> getById(Integer id) {
         return activityService.getById(id);
     }

@@ -1,5 +1,6 @@
 package net.yanrc.xpring.rpc.manger.impl;
 
+import net.yanrc.xpring.common.utils.anots.Logable;
 import net.yanrc.xpring.dal.entity.Activity;
 import net.yanrc.xpring.dal.mapper.ActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,7 @@ public class ActivityManagerImpl implements net.yanrc.xpring.rpc.manger.Activity
         return activityMapper.selectAll();
     }
 
+    @Logable()
     @Cacheable(value = "act", key = "#id.toString()")
     @Override
     public Activity getActById(Integer id) {
