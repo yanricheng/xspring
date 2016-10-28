@@ -2,6 +2,7 @@ package xpring;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import xpring.bean.User;
 
 /**
  * Created by yanricheng on 16-10-24.
@@ -15,6 +16,8 @@ public class SpringAOPDemo {
 //        ISome some = (ISome) context.getBean("someService");
 //        some.doSome();
 //        ((IOther) some).doOther();
+
+        System.out.println(((User)context.getBean("user")).getName());
 
     }
 

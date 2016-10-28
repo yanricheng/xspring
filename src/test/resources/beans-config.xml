@@ -91,5 +91,5 @@
         <property name="name" value="111"/>
     </bean>
 
-    <bean class="xpring.bean.InstantiationAwareBeanPostProcessorBean"/>
+    <bean id="instantiationAwareBeanPostProcessorBean" class="xpring.bean.InstantiationAwareBeanPostProcessorBean"/>
 </beans>

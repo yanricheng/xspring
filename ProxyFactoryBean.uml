@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.springframework.aop.framework.ProxyFactoryBean</OriginalElement>
+  <nodes>
+    <node x="380.71354166666674" y="338.0">org.springframework.aop.framework.ProxyFactoryBean</node>
+    <node x="780.5369791666667" y="256.0">org.springframework.aop.framework.JdkDynamicAopProxy</node>
+    <node x="549.0" y="256.0">org.springframework.aop.framework.ProxyCreatorSupport</node>
+    <node x="622.4635416666667" y="82.0">org.springframework.aop.framework.Advised</node>
+    <node x="145.75" y="164.0">org.springframework.beans.factory.Aware</node>
+    <node x="796.9635416666667" y="0.0">java.io.Serializable</node>
+    <node x="898.4635416666667" y="164.0">org.springframework.aop.framework.AopProxy</node>
+    <node x="732.4635416666667" y="82.0">org.springframework.aop.framework.ProxyConfig</node>
+    <node x="584.9635416666667" y="0.0">org.springframework.aop.TargetClassAware</node>
+    <node x="407.0" y="256.0">org.springframework.beans.factory.FactoryBean</node>
+    <node x="0.0" y="256.0">org.springframework.beans.factory.BeanFactoryAware</node>
+    <node x="187.0" y="256.0">org.springframework.beans.factory.BeanClassLoaderAware</node>
+    <node x="463.96354166666674" y="164.0">org.springframework.aop.framework.AopProxyFactory</node>
+    <node x="655.9635416666667" y="164.0">org.springframework.aop.framework.AdvisedSupport</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.springframework.aop.framework.JdkDynamicAopProxy" target="java.io.Serializable">
+      <point x="0.0" y="-16.0" />
+      <point x="872.5369791666667" y="236.0" />
+      <point x="887.9635416666667" y="236.0" />
+      <point x="887.9635416666667" y="57.0" />
+      <point x="880.9635416666667" y="57.0" />
+      <point x="28.0" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.Advised" target="org.springframework.aop.TargetClassAware">
+      <point x="0.0" y="-16.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.ProxyFactoryBean" target="org.springframework.aop.framework.ProxyCreatorSupport">
+      <point x="64.39999999999998" y="-16.0" />
+      <point x="525.6135416666667" y="318.0" />
+      <point x="686.25" y="318.0" />
+      <point x="45.75" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.ProxyCreatorSupport" target="org.springframework.aop.framework.AdvisedSupport">
+      <point x="45.75" y="-16.0" />
+      <point x="686.25" y="236.0" />
+      <point x="727.4635416666667" y="236.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.ProxyFactoryBean" target="org.springframework.beans.factory.FactoryBean">
+      <point x="0.0" y="-16.0" />
+      <point x="461.21354166666674" y="318.0" />
+      <point x="468.0" y="318.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.AdvisedSupport" target="org.springframework.aop.framework.ProxyConfig">
+      <point x="35.75" y="-16.0" />
+      <point x="763.2135416666667" y="139.0" />
+      <point x="791.9635416666667" y="139.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.ProxyConfig" target="java.io.Serializable">
+      <point x="0.0" y="-16.0" />
+      <point x="791.9635416666667" y="57.0" />
+      <point x="824.9635416666667" y="57.0" />
+      <point x="-28.0" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.ProxyFactoryBean" target="org.springframework.beans.factory.BeanFactoryAware">
+      <point x="-64.39999999999998" y="-16.0" />
+      <point x="396.81354166666677" y="318.0" />
+      <point x="83.5" y="318.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="org.springframework.beans.factory.BeanClassLoaderAware" target="org.springframework.beans.factory.Aware">
+      <point x="0.0" y="-16.0" />
+      <point x="287.0" y="236.0" />
+      <point x="205.0" y="236.0" />
+      <point x="19.75" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.ProxyFactoryBean" target="org.springframework.beans.factory.BeanClassLoaderAware">
+      <point x="-32.200000000000045" y="-16.0" />
+      <point x="429.0135416666667" y="308.0" />
+      <point x="287.0" y="308.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.JdkDynamicAopProxy" target="org.springframework.aop.framework.AopProxy">
+      <point x="61.333333333333314" y="-16.0" />
+      <point x="933.8703125" y="236.0" />
+      <point x="948.4635416666667" y="236.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="org.springframework.beans.factory.BeanFactoryAware" target="org.springframework.beans.factory.Aware">
+      <point x="0.0" y="-16.0" />
+      <point x="83.5" y="236.0" />
+      <point x="165.5" y="236.0" />
+      <point x="-19.75" y="16.0" />
+    </edge>
+    <edge source="org.springframework.aop.framework.AdvisedSupport" target="org.springframework.aop.framework.Advised">
+      <point x="-35.75" y="-16.0" />
+      <point x="691.7135416666667" y="139.0" />
+      <point x="665.9635416666667" y="139.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9739542225730071" x="486.59521880064824" y="408.2467585089141" />
+  <SelectedNodes>
+    <node>org.springframework.aop.framework.ProxyFactoryBean</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
