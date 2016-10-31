@@ -1,9 +1,9 @@
 package net.yanrc.xpring.rpc.service.impl;
 
+import com.netflix.hystrix.exception.HystrixBadRequestException;
 import net.yanrc.app.common.result.DefaultResult;
 import net.yanrc.app.common.result.Result;
 import net.yanrc.xpring.dal.entity.Activity;
-import net.yanrc.xpring.rpc.exception.MessageEnum;
 import net.yanrc.xpring.rpc.manger.ActivityManager;
 import net.yanrc.xpring.rpc.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class ActivityServiceImpl implements ActivityService {
         if (activityInDb != null) {
             return new DefaultResult<Activity>(activityInDb);
         }
-        return new DefaultResult<>(MessageEnum.db_error.message());
+        return new DefaultResult<>();
     }
 
     @Override
@@ -40,12 +40,20 @@ public class ActivityServiceImpl implements ActivityService {
         if (activityInDb != null) {
             return new DefaultResult<Activity>(activityInDb);
         }
-        return new DefaultResult<>(MessageEnum.db_error.message());
+        return new DefaultResult<>();
     }
 
     @Transactional(readOnly = true)
     @Override
     public Result<Activity> getById(Integer id) {
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+//          throw new HystrixBadRequestException("exxx");
+
 //        List<Activity> activityList = activityManager.getAll();
         return new DefaultResult<Activity>(activityManager.getActById(id));
     }
