@@ -3,9 +3,8 @@ package net.yanrc.xpring.web.biz.service;
 import net.yanrc.app.common.result.Result;
 import net.yanrc.xpring.common.utils.anots.Logable;
 import net.yanrc.xpring.dal.entity.Activity;
-import net.yanrc.xpring.rpc.service.ActivityService;
-import net.yanrc.xpring.web.command.activity.GetByIdActivityCommond;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.yanrc.xpring.web.command.CommandFecade;
+import net.yanrc.xpring.web.command.activity.ActivitGetByIdCommond;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutionException;
@@ -17,10 +16,6 @@ import java.util.concurrent.TimeoutException;
  */
 @Service
 public class ActivityBizService {
-
-    @Autowired
-    private ActivityService activityService;
-
     public Result<Activity> addSelective(Activity activity) {
         return null;
     }
@@ -35,10 +30,10 @@ public class ActivityBizService {
 
     @Logable
     public Result<Activity> getById(Integer id) {
-//        return GetByIdActivityCommond.build(activityService).activityId(id).execute();
 
         try {
-            return GetByIdActivityCommond.build(activityService).activityId(id).queue().get(1000, TimeUnit.SECONDS);
+//            return activitGetByIdCommond.activityId(id).queue().get(1000, TimeUnit.SECONDS);
+            return CommandFecade.getCommond(ActivitGetByIdCommond.class).activityId(id).queue().get(1000, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

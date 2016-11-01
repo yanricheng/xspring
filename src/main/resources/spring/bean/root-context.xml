@@ -4,6 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+    <bean class="net.yanrc.xpring.web.command.CommandFecade" autowire="byName">
+	</bean>
+	<bean scope="prototype" id="activitGetByIdCommond" name="activitGetByIdCommond" class="net.yanrc.xpring.web.command.activity.ActivitGetByIdCommond">
+        <property name="activityService" ref="activityService"></property>
+    </bean>
 
 	<!--<bean id="logBeforeAdvice"
 		  class="net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice"/>

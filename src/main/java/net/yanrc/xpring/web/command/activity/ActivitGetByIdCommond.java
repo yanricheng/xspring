@@ -6,34 +6,21 @@ import net.yanrc.app.common.result.PresentResult;
 import net.yanrc.app.common.result.Result;
 import net.yanrc.xpring.dal.entity.Activity;
 import net.yanrc.xpring.rpc.service.ActivityService;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by Administrator on 2016/10/30.
  */
-@Service
-public class GetByIdActivityCommond extends HystrixCommand<Result<Activity>> {
-
-    private String commondName;
+//@Component
+//@Scope(/*proxyMode = ScopedProxyMode.TARGET_CLASS,*/ value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class ActivitGetByIdCommond extends HystrixCommand<Result<Activity>> {
     private ActivityService activityService;
     private Integer activityId;
 
 
-    private GetByIdActivityCommond(String name) {
+    public ActivitGetByIdCommond() {
         //最少配置:指定命令组名(CommandGroup)
         super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
-        this.commondName = name;
-    }
-
-    public static GetByIdActivityCommond build(ActivityService activityService) {
-        GetByIdActivityCommond cmd = new GetByIdActivityCommond("GetByIdCommond");
-        cmd.activityService = activityService;
-        return cmd;
-    }
-
-    public GetByIdActivityCommond activityId(Integer activityId) {
-        this.activityId = activityId;
-        return this;
+        System.out.println("新建 ............GetByIdActivityCommond");
     }
 
     @Override
@@ -46,5 +33,14 @@ public class GetByIdActivityCommond extends HystrixCommand<Result<Activity>> {
         Activity activity = new Activity();
         activity.setName("yanricheng");
         return PresentResult.fromNullable(activity);
+    }
+
+    public void setActivityService(ActivityService activityService) {
+        this.activityService = activityService;
+    }
+
+    public ActivitGetByIdCommond activityId(Integer activityId) {
+        this.activityId = activityId;
+        return this;
     }
 }
