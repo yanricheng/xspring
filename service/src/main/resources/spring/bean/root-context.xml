@@ -1,0 +1,54 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:cache="http://www.springframework.org/schema/cache"
+	   xmlns:beans="http://www.springframework.org/schema/util"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+     http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+     http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+<!-- Root Context: defines shared resources visible to all other web components -->
+	<dubbo:application name="spring-server"/>
+	<dubbo:registry protocol="zookeeper" address="${dubbo.host}"/>
+
+	<bean id="activityService" class="net.yanrc.xpring.rpc.service.impl.ActivityServiceImpl"/>
+	<dubbo:service ref="activityService" version="1.0.0"  timeout="30000"
+				   interface="net.yanrc.xpring.rpc.service.ActivityService"/>
+
+
+
+	<!--<bean id="logBeforeAdvice"
+		  class="net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice"/>
+
+	<bean id="helloSpeaker"
+		  class="net.yanrc.xpring.web.biz.service.demo.HelloSpeaker"/>
+
+	<bean id="helloSpeakerBean"
+		  class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice</value>
+		</property>
+		<property name="target">
+			<ref bean="helloSpeaker"/>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>logBeforeAdvice</value>
+			</list>
+		</property>
+	</bean>-->
+</beans>

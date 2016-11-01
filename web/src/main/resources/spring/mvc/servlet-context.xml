@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:beans="http://www.springframework.org/schema/util"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+     http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <context:property-placeholder location="classpath:spring.properties"/>
+
+    <context:component-scan base-package="net.yanrc.xpring.rpc.manger"/>
+    <context:component-scan base-package="net.yanrc.xpring.rpc.service"/>
+    <context:component-scan base-package="net.yanrc.xpring.web.biz.service"/>
+    <context:component-scan base-package="net.yanrc.xpring.web.controllor"/>
+    <context:component-scan base-package="net.yanrc.xpring.web.command"/>
+
+    <context:annotation-config/>
+
+    <!-- 通用缓存处理-->
+    <cache:annotation-driven  error-handler="errorHandler"/>
+    <bean id="errorHandler" class="net.yanrc.xpring.common.utils.cache.FixedCacheErrorHandler" />
+    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg name="redisOperations" ref="redisTemplate"/>
+        <property name="usePrefix" value="true" />
+        <property name="defaultExpiration" value="216000"/><!-- 1小时 -->
+        <property name="expires">
+            <map>
+                <entry key="act" value="60"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- redis 链接 -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.pool.maxTotal}"/>
+        <property name="maxIdle" value="${redis.pool.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}"/>
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>
+        <property name="testOnReturn" value="${redis.pool.testOnReturn}"/>
+    </bean>
+
+    <bean id="jedisConnFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:usePool="true"
+          p:hostName="${redis.host}"
+          p:port="${redis.port}"
+          p:password="${redis.password}"
+          p:database="${redis.database}"
+          p:timeout="${redis.timeout}"
+          p:poolConfig-ref="jedisPoolConfig"/>
+
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <constructor-arg name="connectionFactory" ref="jedisConnFactory"/>
+    </bean>
+
+    <bean id="objectMapper" class="net.yanrc.app.common.util.JsonUtils" factory-method="getObjectMapper"/>
+
+    <!-- 存库时候用标准的json格式 -->
+    <bean id="genericJackson2JsonRedisSerializer"
+          class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer">
+        <!--<constructor-arg name="mapper" ref="objectMapper"/>-->
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnFactory"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer" ref="genericJackson2JsonRedisSerializer"/>
+
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer" ref="genericJackson2JsonRedisSerializer"/>
+    </bean>
+
+    <!-- tomcat jdbc-->
+    <bean id="poolProperties" class="org.apache.tomcat.jdbc.pool.PoolProperties">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="${jdbc.name}"/>
+        <property name="password" value="${jdbc.psd}"/>
+        <property name="jmxEnabled" value="true"/>
+        <property name="testWhileIdle" value="false"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="validationInterval" value="30000"/>
+        <property name="timeBetweenEvictionRunsMillis" value="30000"/>
+        <property name="maxActive" value="${jdbc.max.active}"/>
+        <property name="initialSize" value="${jdbc.initial.size}"/>
+        <property name="maxWait" value="10000"/>
+        <property name="removeAbandonedTimeout" value="60"/>
+        <property name="minEvictableIdleTimeMillis" value="30000"/>
+        <property name="minIdle" value="${jdbc.initial.size}"/>
+        <property name="logAbandoned" value="true"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="jdbcInterceptors"
+                  value="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"/>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+        <property name="poolProperties" ref="poolProperties"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:/mybatis/sqlmap-config.xml"/>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:mybatis/mapper/*.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 将mybatis 的mapper实例纳入到spring bean管理 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="net.yanrc.xpring.dal.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--<bean name="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean name="handlerAdapter" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>-->
+
+    <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+
+    <!-- Enables the Spring MVC @Controller programming model -->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="false">
+            <ref bean="stringHttpMessageConverter"/>
+            <ref bean="mappingJackson2HttpMessageConverter"/>
+            <!--<ref bean="mappingJackson2XmlHttpMessageConverter"/>-->
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <!-- 页面跳转控制-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="mappingJackson2HttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/plain;charset=UTF-8</value>
+                <value>text/plain</value>
+                <value>text/html</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="mappingJackson2XmlHttpMessageConverter"
+          class="org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/xml;charset=UTF-8</value>
+                <value>text/xml;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <constructor-arg index="0" value="UTF-8"/>
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/plain;charset=UTF-8</value>
+                <value>text/plain</value>
+                <value>text/html</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="systemIntroduction" class="net.yanrc.xpring.common.utils.sys.SystemIntroduction"/>
+    <bean id="systemAdvisor"
+          class="org.springframework.aop.support.DefaultIntroductionAdvisor">
+        <constructor-arg index="0">
+            <ref bean="systemIntroduction"/>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <value>net.yanrc.xpring.common.utils.sys.SystemService</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="introductionProxyCreator"
+          class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>*Controller</value>
+                <value>*Service</value>
+                <!--<value>*Manager</value>-->
+                <value>*Mapper</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <value>systemAdvisor</value>
+        </property>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.yanrc</groupId>
+    <artifactId>xpring-web</artifactId>
+    <name>xpring::web</name>
+    <packaging>war</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>net.yanrc</groupId>
+        <artifactId>xpring-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../parent</relativePath>
+    </parent>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <filters>
+                    <filter>${project.basedir}/src/main/resources/env/dev/config.properties</filter>
+                </filters>
+            </build>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <build>
+                <filters>
+                    <filter>${project.basedir}/src/main/resources/env/test/config.properties</filter>
+                </filters>
+            </build>
+        </profile>
+
+        <profile>
+            <id>beta</id>
+            <build>
+                <filters>
+                    <filter>${project.basedir}/src/main/resources/env/beta/config.properties</filter>
+                </filters>
+            </build>
+        </profile>
+
+        <profile>
+            <id>release</id>
+            <build>
+                <filters>
+                    <filter>${project.basedir}/src/main/resources/env/release/config.properties</filter>
+                </filters>
+            </build>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.yanrc</groupId>
+            <artifactId>xpring-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>xpring-web</finalName>
+    </build>
+</project>
