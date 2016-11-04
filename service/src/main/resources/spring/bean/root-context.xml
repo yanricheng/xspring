@@ -21,9 +21,11 @@
      http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
      http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-<!-- Root Context: defines shared resources visible to all other web components -->
+    <!-- Root Context: defines shared resources visible to all other web components -->
 	<dubbo:application name="spring-server"/>
-	<dubbo:registry protocol="zookeeper" address="${dubbo.host}"/>
+    <dubbo:registry address="${dubbo.registry}" client="curator" protocol="zookeeper"/>
+	<dubbo:protocol name="dubbo" port="${dubbo.port}" host="${dubbo.host}" threadpool="fixed" threads="200"/>
+
 
 	<bean id="activityService" class="net.yanrc.xpring.rpc.service.impl.ActivityServiceImpl"/>
 	<dubbo:service ref="activityService" version="1.0.0"  timeout="30000"
