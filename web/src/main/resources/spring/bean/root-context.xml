@@ -25,14 +25,10 @@
 	<dubbo:application name="xpring-web"></dubbo:application>
 	<dubbo:registry address="${dubbo.registry}" client="curator"></dubbo:registry>
 
-	<dubbo:reference interface="" id=""
-					 timeout="10000"/>
+	<dubbo:reference interface="net.yanrc.xpring.rpc.service.ActivityService" id="activityService" timeout="10000"/>
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-    <bean class="net.yanrc.xpring.web.command.CommandFecade" autowire="byName">
-	</bean>
-
-	<bean id="activityService" class="net.yanrc.xpring.rpc.service.impl.ActivityServiceImpl"/>
+    <bean class="net.yanrc.xpring.web.command.CommandFecade" autowire="byName"/>
 
     <bean scope="prototype" id="activitGetByIdCommond" name="activitGetByIdCommond" class="net.yanrc.xpring.web.command.activity.ActivitGetByIdCommond" autowire="byType">
         <!--<property name="activityService" ref="activityService"></property>-->
