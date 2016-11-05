@@ -1,4 +1,4 @@
-package net.yanrc.xpring.web;
+package net.yanrc.xpring.web.controller;
 
 import net.yanrc.app.common.api.ApiResponse;
 import net.yanrc.app.common.api.HeadEnum;

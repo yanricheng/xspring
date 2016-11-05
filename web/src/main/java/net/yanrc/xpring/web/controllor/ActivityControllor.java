@@ -6,6 +6,7 @@ import net.yanrc.app.common.result.Result;
 import net.yanrc.app.common.util.JsonUtils;
 import net.yanrc.xpring.common.utils.anots.Logable;
 import net.yanrc.xpring.dal.entity.Activity;
+import net.yanrc.xpring.rpc.service.ActivityService;
 import net.yanrc.xpring.web.biz.service.ActivityBizService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,9 @@ public class ActivityControllor {
     private static final Logger logger = LoggerFactory.getLogger(ActivityControllor.class);
     @Autowired
     private ActivityBizService activityBizService;
+
+    @Autowired
+    private ActivityService activityService;
 
     @RequestMapping(value = "/act/add", method = RequestMethod.GET)
     @ResponseBody
