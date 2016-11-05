@@ -25,6 +25,7 @@
 
     <context:component-scan base-package="net.yanrc.xpring.rpc.manger"/>
     <context:component-scan base-package="net.yanrc.xpring.rpc.service"/>
+    <context:component-scan base-package="net.yanrc.xpring.web"/>
 
     <context:annotation-config/>
 

@@ -22,8 +22,9 @@
      http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 	<!--duboo-->
-	<dubbo:application name="xpring-web"></dubbo:application>
-	<dubbo:registry address="${dubbo.registry}" client="curator"></dubbo:registry>
+	<dubbo:application name="xpring-web" ></dubbo:application>
+    <dubbo:registry address="${dubbo.registry}" client="curator" protocol="zookeeper"/>
+    <dubbo:protocol name="dubbo" threadpool="fixed" threads="200"/>
 
 	<dubbo:reference interface="net.yanrc.xpring.rpc.service.ActivityService" id="activityService" timeout="10000"/>
 

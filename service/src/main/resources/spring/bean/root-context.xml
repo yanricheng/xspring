@@ -24,7 +24,7 @@
     <!-- Root Context: defines shared resources visible to all other web components -->
 	<dubbo:application name="spring-server"/>
     <dubbo:registry address="${dubbo.registry}" client="curator" protocol="zookeeper"/>
-	<dubbo:protocol name="dubbo" port="${dubbo.port}" host="${dubbo.host}" threadpool="fixed" threads="200"/>
+	<dubbo:protocol name="dubbo"  host="${dubbo.host}" threadpool="fixed" threads="200"/>
 
 
 	<bean id="activityService" class="net.yanrc.xpring.rpc.service.impl.ActivityServiceImpl"/>
