@@ -23,19 +23,11 @@
      http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
      http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-	<!--duboo-->
-	<dubbo:application name="xpring-web" ></dubbo:application>
-    <dubbo:registry address="${dubbo.registry}" client="curator" protocol="zookeeper"/>
-    <dubbo:protocol name="dubbo" threadpool="fixed" threads="200"/>
+    <!-- Root Context: defines shared resources visible to all other web components -->
 
-	<dubbo:reference interface="net.yanrc.xpring.rpc.service.ActivityService" id="activityService" timeout="10000"/>
 
-	<!-- Root Context: defines shared resources visible to all other web components -->
-    <bean class="net.yanrc.xpring.web.command.CommandFecade" autowire="byName"/>
 
-    <bean scope="prototype" id="activitGetByIdCommond" name="activitGetByIdCommond" class="net.yanrc.xpring.web.command.activity.ActivitGetByIdCommond" autowire="byType">
-        <!--<property name="activityService" ref="activityService"></property>-->
-    </bean>
+
 
 	<!--<bean id="logBeforeAdvice"
 		  class="net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice"/>

@@ -1,9 +1,10 @@
 package net.yanrc.xpring.dal.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 //@JsonIgnoreProperties(value = {"idx"})
-public class Activity {
+public class Activity implements Serializable {
     private Integer id;
 
     private Integer type;

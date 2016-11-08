@@ -1,19 +1,16 @@
 package net.yanrc.xpring.rpc.service.impl;
 
-import com.netflix.hystrix.exception.HystrixBadRequestException;
 import net.yanrc.app.common.result.DefaultResult;
 import net.yanrc.app.common.result.Result;
 import net.yanrc.xpring.dal.entity.Activity;
 import net.yanrc.xpring.rpc.manger.ActivityManager;
 import net.yanrc.xpring.rpc.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Administrator on 2016/10/13.
  */
-@Service
 public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
