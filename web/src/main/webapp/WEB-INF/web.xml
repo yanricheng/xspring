@@ -32,6 +32,24 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>net.yanrc.xpring.web.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!--<session-config>
+        <session-timeout>100000</session-timeout>
+        <cookie-config>
+            <max-age>1000</max-age>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>-->
+
     <!-- Processes application requests -->
     <servlet>
         <servlet-name>appServlet</servlet-name>
