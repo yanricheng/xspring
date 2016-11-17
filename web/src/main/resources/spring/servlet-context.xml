@@ -23,7 +23,7 @@
      http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
      http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <context:property-placeholder location="classpath:spring.properties"/>
+    <context:property-placeholder location="classpath:config.properties"/>
 
     <context:component-scan base-package="net.yanrc.xpring.web.biz.service"/>
     <context:component-scan base-package="net.yanrc.xpring.web.controllor"/>

@@ -91,7 +91,7 @@
                 <version>2.1</version>
                 <configuration>
                     <path>/</path>
-                    <port>9090</port>
+                    <port>8089</port>
                     <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
