@@ -1,6 +1,6 @@
 package net.yanrc.xpring.web.filter;
 
-import net.yanrc.xpring.common.utils.config.ConfigUtils;
+import net.yanrc.xpring.component.ConfigComponent;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class AuthFilter implements Filter {
 //            System.out.println("get name:" + session.getAttribute("name").toString());
 //        }
 
-        System.out.println(ConfigUtils.getDynamicPropertyFactory().getStringProperty("user.name","yanrc").get());
+        System.out.println(ConfigComponent.getDynamicPropertyFactory().getStringProperty("user.name","yanrc").get());
 
         filterChain.doFilter(request, response);
 
