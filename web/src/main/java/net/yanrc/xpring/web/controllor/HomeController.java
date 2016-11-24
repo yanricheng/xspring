@@ -44,7 +44,7 @@ public class HomeController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
-//        logger.info("Welcome home! The client locale is {}.", locale);
+//        logger.info("Welcome home! The client locale is {}.", locale); http://www.blogs8.cn/posts/EG71191
         String name = configComponent.getDynamicPropertyFactory().getStringProperty("user.name", "yanrc").get();
         logger.info("config:{}", name);
         Date date = new Date();
