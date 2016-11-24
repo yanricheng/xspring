@@ -4,12 +4,14 @@ import net.yanrc.app.common.api.ApiResponse;
 import net.yanrc.app.common.result.DefaultResult;
 import net.yanrc.app.common.util.JsonUtils;
 import net.yanrc.xpring.common.utils.XRequestParam;
+import net.yanrc.xpring.component.ConfigComponent;
 import net.yanrc.xpring.rpc.dto.query.UserQueryDto;
 import net.yanrc.xpring.rpc.model.UserModel;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -32,6 +34,9 @@ import java.util.Locale;
 @Controller
 public class HomeController {
 
+    @Autowired
+    ConfigComponent configComponent;
+
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     /**
@@ -39,8 +44,9 @@ public class HomeController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
-        logger.info("Welcome home! The client locale is {}.", locale);
-
+//        logger.info("Welcome home! The client locale is {}.", locale);
+        String name = configComponent.getDynamicPropertyFactory().getStringProperty("user.name", "yanrc").get();
+        logger.info("config:{}", name);
         Date date = new Date();
         DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 

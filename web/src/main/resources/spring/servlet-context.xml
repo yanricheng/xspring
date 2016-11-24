@@ -30,6 +30,9 @@
     <context:component-scan base-package="net.yanrc.xpring.web.command"/>
 
     <context:annotation-config/>
+
+    <!-- utils-->
+    <bean id="configComponent" class="net.yanrc.xpring.component.ConfigComponent"/>
     <bean id="objectMapper" class="net.yanrc.app.common.util.JsonUtils" factory-method="getObjectMapper"/>
 
     <!--<bean name="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
