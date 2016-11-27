@@ -23,7 +23,7 @@
      http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
      http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <context:property-placeholder location="classpath:config.properties"/>
+    <context:property-placeholder location="classpath:spring.properties"/>
 
     <context:component-scan base-package="net.yanrc.xpring.web.biz.service"/>
     <context:component-scan base-package="net.yanrc.xpring.web.controllor"/>
@@ -32,7 +32,10 @@
     <context:annotation-config/>
 
     <!-- utils-->
-    <bean id="configComponent" class="net.yanrc.xpring.component.ConfigComponent"/>
+    <bean id="configComponent" class="net.yanrc.xpring.component.config.ConfigComponent" >
+        <constructor-arg index="0" value="${zookeeper.url}"/>
+    </bean>
+
     <bean id="objectMapper" class="net.yanrc.app.common.util.JsonUtils" factory-method="getObjectMapper"/>
 
     <!--<bean name="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>

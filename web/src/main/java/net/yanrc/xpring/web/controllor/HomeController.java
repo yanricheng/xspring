@@ -4,7 +4,7 @@ import net.yanrc.app.common.api.ApiResponse;
 import net.yanrc.app.common.result.DefaultResult;
 import net.yanrc.app.common.util.JsonUtils;
 import net.yanrc.xpring.common.utils.XRequestParam;
-import net.yanrc.xpring.component.ConfigComponent;
+import net.yanrc.xpring.component.config.ConfigComponent;
 import net.yanrc.xpring.rpc.dto.query.UserQueryDto;
 import net.yanrc.xpring.rpc.model.UserModel;
 import org.apache.commons.beanutils.BeanUtils;
