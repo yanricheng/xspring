@@ -12,9 +12,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,11 +35,12 @@ import java.util.Locale;
  */
 @Controller
 public class HomeController {
-
+    static final String key = "c_yanrc";
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
     @Autowired
     ConfigComponent configComponent;
-
-    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+    @Value("${xspring.user.name}")
+    private String userName;
 
     /**
      * Simply selects the home view to render by returning its name.
@@ -47,6 +50,7 @@ public class HomeController {
 //        logger.info("Welcome home! The client locale is {}.", locale); http://www.blogs8.cn/posts/EG71191
         String name = configComponent.getDynamicPropertyFactory().getStringProperty("user.name", "yanrc").get();
         logger.info("config:{}", name);
+        logger.info("userName:{}", userName);
         Date date = new Date();
         DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
@@ -62,7 +66,6 @@ public class HomeController {
         resultModel.addAttribute("welcome", "welcome");
         return "user/add";
     }
-
 
     //    Set<MediaType> set = Sets.newHashSet();
 //    set.add(MediaType.APPLICATION_JSON);
@@ -94,8 +97,6 @@ public class HomeController {
 
         return new ApiResponse(new DefaultResult<UserModel>(user));
     }
-
-    static final String key = "c_yanrc";
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody

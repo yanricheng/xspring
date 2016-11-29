@@ -10,6 +10,10 @@
     </context-param>
 
     <!-- Creates the Spring Container shared by all Servlets and Filters -->
+    <context-param>
+        <param-name>contextInitializerClasses</param-name>
+        <param-value>net.yanrc.xpring.component.config.SpringProfileSettingApplicationContextInitializer</param-value>
+    </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

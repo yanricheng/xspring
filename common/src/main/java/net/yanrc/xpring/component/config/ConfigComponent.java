@@ -52,6 +52,10 @@ public class ConfigComponent {
         }
     }
 
+    public Object getProperty(String name) {
+        return dynamicPropertyFactory.getStringProperty(name, null).get();
+    }
+
     public DynamicPropertyFactory getDynamicPropertyFactory() {
         return dynamicPropertyFactory;
     }
