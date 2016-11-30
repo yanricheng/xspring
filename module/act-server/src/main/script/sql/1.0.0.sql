@@ -1,4 +1,4 @@
-create table config_properties(
+create table config_propertiy(
   id bigint not null AUTO_INCREMENT COMMENT 'id',
   app_id  bigint not null  COMMENT 'app_id',
   env_id bigint not null COMMENT '环境id',

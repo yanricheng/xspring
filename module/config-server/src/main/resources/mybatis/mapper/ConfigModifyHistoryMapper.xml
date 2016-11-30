@@ -7,19 +7,15 @@
     <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
   </resultMap>
-
   <resultMap id="ResultMapWithBLOBs" type="net.yanrc.xpring.dal.entity.ConfigModifyHistory" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
-
   <sql id="Base_Column_List" >
     id, config_properties_id, operate_time, operator
   </sql>
-
   <sql id="Blob_Column_List" >
     content
   </sql>
-
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 'false' as QUERYID,
     <include refid="Base_Column_List" />
@@ -28,20 +24,17 @@
     from config_modify_history
     where id = #{id,jdbcType=BIGINT}
   </select>
-
-  <insert id="insert" parameterType="net.yanrc.xpring.dal.entity.ConfigModifyHistory" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-    insert into config_modify_history (
-    id, config_properties_id, operate_time,operator, content)
-    values (
-      #{id,jdbcType=BIGINT},
-      #{configPropertiesId,jdbcType=BIGINT},
-      #{operateTime,jdbcType=TIMESTAMP},
-      #{operator,jdbcType=VARCHAR},
-      #{content,jdbcType=LONGVARCHAR}
-    )
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from config_modify_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="net.yanrc.xpring.dal.entity.ConfigModifyHistory" >
+    insert into config_modify_history (id, config_properties_id, operate_time, 
+      operator, content)
+    values (#{id,jdbcType=BIGINT}, #{configPropertiesId,jdbcType=BIGINT}, #{operateTime,jdbcType=TIMESTAMP}, 
+      #{operator,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-
-  <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.entity.ConfigModifyHistory"  useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+  <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.entity.ConfigModifyHistory" >
     insert into config_modify_history
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -78,12 +71,6 @@
       </if>
     </trim>
   </insert>
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from config_modify_history
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-
   <update id="updateByPrimaryKeySelective" parameterType="net.yanrc.xpring.dal.entity.ConfigModifyHistory" >
     update config_modify_history
     <set >
@@ -102,7 +89,6 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.yanrc.xpring.dal.entity.ConfigModifyHistory" >
     update config_modify_history
     set config_properties_id = #{configPropertiesId,jdbcType=BIGINT},
@@ -111,7 +97,6 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
   <update id="updateByPrimaryKey" parameterType="net.yanrc.xpring.dal.entity.ConfigModifyHistory" >
     update config_modify_history
     set config_properties_id = #{configPropertiesId,jdbcType=BIGINT},
@@ -119,5 +104,4 @@
       operator = #{operator,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
 </mapper>

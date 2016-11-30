@@ -11,6 +11,7 @@
         <groupId>net.yanrc</groupId>
         <artifactId>xpring-parent</artifactId>
         <version>1.0.0</version>
+        <relativePath>../../parent</relativePath>
     </parent>
 
 
@@ -62,6 +63,11 @@
             <artifactId>xpring-common</artifactId>
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>net.yanrc</groupId>
+            <artifactId>config-api</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -90,7 +96,7 @@
                 <version>2.1</version>
                 <configuration>
                     <path>/</path>
-                    <port>8089</port>
+                    <port>7089</port>
                     <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
@@ -101,7 +107,7 @@
                 <version>9.2.10.v20150310</version>
                 <configuration>
                     <httpConnector>
-                        <port>8080</port>
+                        <port>7089</port>
                     </httpConnector>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>

@@ -1,8 +1,9 @@
-package net.yanrc.xpring.dal.entity;
+package net.yanrc.xpring.rpc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ConfigProperties {
+public class ConfigPropertityModel implements Serializable {
     private Long id;
 
     private Long appId;

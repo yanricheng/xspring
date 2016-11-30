@@ -11,6 +11,7 @@
         <groupId>net.yanrc</groupId>
         <artifactId>xpring-parent</artifactId>
         <version>1.0.0</version>
+        <relativePath>../../parent</relativePath>
     </parent>
 
     <build>

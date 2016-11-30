@@ -40,8 +40,8 @@
 		
 		
 		<table schema="" 
-			tableName=""
-			domainObjectName=""
+			tableName="config_modify_history"
+			domainObjectName="ConfigModifyHistory"
 
 			enableCountByExample="false" 
 			enableUpdateByExample="false"
