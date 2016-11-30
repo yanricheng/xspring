@@ -1,5 +1,6 @@
 package config;
 
+import com.netflix.config.ConfigurationManager;
 import com.netflix.config.DynamicPropertyFactory;
 
 /**
@@ -9,7 +10,9 @@ import com.netflix.config.DynamicPropertyFactory;
 public class ConfigTest {
 
     public static void main(String[] args) {
-        System.out.println(DynamicPropertyFactory.getInstance().getStringProperty("demo.user.name","阿虎").getDynamicProperty());
+        DynamicPropertyFactory factory = DynamicPropertyFactory.getInstance();
+        System.out.println(factory.getStringProperty("demo.user.name","阿虎").getDynamicProperty());
+        System.out.println(ConfigurationManager.getConfigInstance().getString("@environment"));
     }
 
 }

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.yanrc.xpring.dal.mapper.ConfigPropertiesMapper" >
+  <resultMap id="BaseResultMap" type="net.yanrc.xpring.dal.entity.ConfigProperties" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="app_id" property="appId" jdbcType="BIGINT" />
+    <result column="env_id" property="envId" jdbcType="BIGINT" />
+    <result column="task_id" property="taskId" jdbcType="BIGINT" />
+    <result column="config_key" property="configKey" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_editor" property="lastEditor" jdbcType="VARCHAR" />
+    <result column="last_edit_time" property="lastEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="ResultMapWithBLOBs" type="net.yanrc.xpring.dal.entity.ConfigProperties" extends="BaseResultMap" >
+    <result column="config_value" property="configValue" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, app_id, env_id, task_id, config_key, creator, create_time, last_editor, last_edit_time
+  </sql>
+
+  <sql id="Blob_Column_List" >
+    config_value
+  </sql>
+
+  <select id="selectAll">
+      select 'false' as QUERYID,
+      <include refid="Base_Column_List" />
+      ,
+      <include refid="Blob_Column_List" />
+      from config_properties
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from config_properties
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insert" parameterType="net.yanrc.xpring.dal.entity.ConfigProperties" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    insert into config_properties (id, app_id, env_id, 
+      task_id, config_key, creator, 
+      create_time, last_editor, last_edit_time, 
+      config_value)
+    values (#{id,jdbcType=BIGINT}, #{appId,jdbcType=BIGINT}, #{envId,jdbcType=BIGINT}, 
+      #{taskId,jdbcType=BIGINT}, #{configKey,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastEditor,jdbcType=VARCHAR}, #{lastEditTime,jdbcType=TIMESTAMP}, 
+      #{configValue,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.entity.ConfigProperties"  useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    insert into config_properties
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="envId != null" >
+        env_id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="configKey != null" >
+        config_key,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastEditor != null" >
+        last_editor,
+      </if>
+      <if test="lastEditTime != null" >
+        last_edit_time,
+      </if>
+      <if test="configValue != null" >
+        config_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="envId != null" >
+        #{envId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="configKey != null" >
+        #{configKey,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEditor != null" >
+        #{lastEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="lastEditTime != null" >
+        #{lastEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="configValue != null" >
+        #{configValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from config_properties
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <update id="updateByPrimaryKeySelective" parameterType="net.yanrc.xpring.dal.entity.ConfigProperties" >
+    update config_properties
+    <set >
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="envId != null" >
+        env_id = #{envId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="configKey != null" >
+        config_key = #{configKey,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEditor != null" >
+        last_editor = #{lastEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="lastEditTime != null" >
+        last_edit_time = #{lastEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="configValue != null" >
+        config_value = #{configValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.yanrc.xpring.dal.entity.ConfigProperties" >
+    update config_properties
+    set app_id = #{appId,jdbcType=BIGINT},
+      env_id = #{envId,jdbcType=BIGINT},
+      task_id = #{taskId,jdbcType=BIGINT},
+      config_key = #{configKey,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_editor = #{lastEditor,jdbcType=VARCHAR},
+      last_edit_time = #{lastEditTime,jdbcType=TIMESTAMP},
+      config_value = #{configValue,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="net.yanrc.xpring.dal.entity.ConfigProperties" >
+    update config_properties
+    set app_id = #{appId,jdbcType=BIGINT},
+      env_id = #{envId,jdbcType=BIGINT},
+      task_id = #{taskId,jdbcType=BIGINT},
+      config_key = #{configKey,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_editor = #{lastEditor,jdbcType=VARCHAR},
+      last_edit_time = #{lastEditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

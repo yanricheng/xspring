@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.springframework.aop.MethodBeforeAdvice</OriginalElement>
+  <nodes>
+    <node x="441.375" y="0.0">org.aopalliance.aop.Advice</node>
+    <node x="0.0" y="249.0">org.springframework.aop.ThrowsAdvice</node>
+    <node x="384.95833333333337" y="166.0">org.springframework.aop.MethodBeforeAdvice</node>
+    <node x="379.625" y="249.0">org.springframework.aop.framework.adapter.ThrowsAdviceInterceptor</node>
+    <node x="610.625" y="249.0">org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor</node>
+    <node x="599.7954545454545" y="166.0">org.aopalliance.intercept.MethodInterceptor</node>
+    <node x="147.0" y="249.0">org.springframework.aop.AfterReturningAdvice</node>
+    <node x="626.7954545454545" y="83.0">org.aopalliance.intercept.Interceptor</node>
+    <node x="252.95833333333337" y="166.0">org.springframework.aop.AfterAdvice</node>
+    <node x="411.95833333333337" y="83.0">org.springframework.aop.BeforeAdvice</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.aopalliance.intercept.MethodInterceptor" target="org.aopalliance.intercept.Interceptor">
+      <point x="0.0" y="-16.5" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="org.springframework.aop.ThrowsAdvice" target="org.springframework.aop.AfterAdvice">
+      <point x="0.0" y="-16.5" />
+      <point x="63.5" y="219.0" />
+      <point x="266.95833333333337" y="219.0" />
+      <point x="-42.0" y="16.5" />
+    </edge>
+    <edge source="org.springframework.aop.AfterAdvice" target="org.aopalliance.aop.Advice">
+      <point x="0.0" y="-16.5" />
+      <point x="308.95833333333337" y="58.0" />
+      <point x="454.5416666666667" y="58.0" />
+      <point x="-26.333333333333314" y="16.5" />
+    </edge>
+    <edge source="org.springframework.aop.framework.adapter.ThrowsAdviceInterceptor" target="org.springframework.aop.AfterAdvice">
+      <point x="-50.25" y="-16.5" />
+      <point x="429.875" y="229.0" />
+      <point x="322.95833333333337" y="229.0" />
+      <point x="14.0" y="16.5" />
+    </edge>
+    <edge source="org.springframework.aop.BeforeAdvice" target="org.aopalliance.aop.Advice">
+      <point x="0.0" y="-16.5" />
+      <point x="473.45833333333337" y="58.0" />
+      <point x="480.875" y="58.0" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="org.springframework.aop.MethodBeforeAdvice" target="org.springframework.aop.BeforeAdvice">
+      <point x="0.0" y="-16.5" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor" target="org.aopalliance.intercept.MethodInterceptor">
+      <point x="63.25" y="-16.5" />
+      <point x="800.375" y="229.0" />
+      <point x="721.2954545454545" y="229.0" />
+      <point x="40.5" y="16.5" />
+    </edge>
+    <edge source="org.aopalliance.intercept.Interceptor" target="org.aopalliance.aop.Advice">
+      <point x="0.0" y="-16.5" />
+      <point x="680.7954545454545" y="58.0" />
+      <point x="507.2083333333333" y="58.0" />
+      <point x="26.333333333333314" y="16.5" />
+    </edge>
+    <edge source="org.springframework.aop.AfterReturningAdvice" target="org.springframework.aop.AfterAdvice">
+      <point x="0.0" y="-16.5" />
+      <point x="236.5" y="229.0" />
+      <point x="294.95833333333337" y="229.0" />
+      <point x="-14.0" y="16.5" />
+    </edge>
+    <edge source="org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor" target="org.springframework.aop.AfterAdvice">
+      <point x="-63.25" y="-16.5" />
+      <point x="673.875" y="219.0" />
+      <point x="350.95833333333337" y="219.0" />
+      <point x="42.0" y="16.5" />
+    </edge>
+    <edge source="org.springframework.aop.framework.adapter.ThrowsAdviceInterceptor" target="org.aopalliance.intercept.MethodInterceptor">
+      <point x="50.25" y="-16.5" />
+      <point x="530.375" y="229.0" />
+      <point x="640.2954545454545" y="229.0" />
+      <point x="-40.5" y="16.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="188.66666666666663" y="143.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
