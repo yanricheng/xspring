@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +47,7 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
 //        logger.info("Welcome home! The client locale is {}.", locale); http://www.blogs8.cn/posts/EG71191
-        String name = configComponent.getDynamicPropertyFactory().getStringProperty("user.name", "yanrc").get();
+        String name = configComponent.getDynamicPropertyFactory().getStringProperty("demo.user.name", "yanrc").get();
         logger.info("config:{}", name);
         logger.info("userName:{}", userName);
         Date date = new Date();

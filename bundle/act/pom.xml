@@ -13,6 +13,15 @@
         <version>1.0.0</version>
     </parent>
 
+    <dependencies>
+        <dependency>
+            <groupId>net.yanrc</groupId>
+            <artifactId>xpring-common</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>

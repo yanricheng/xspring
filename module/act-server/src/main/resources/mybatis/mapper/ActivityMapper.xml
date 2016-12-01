@@ -34,7 +34,7 @@
       )
   </insert>
 
-  <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.entity.Activity"  useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+  <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.entity.Activity" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
     insert into activity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
