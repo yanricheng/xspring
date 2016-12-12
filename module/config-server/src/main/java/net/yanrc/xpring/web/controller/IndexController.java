@@ -31,10 +31,9 @@ public class IndexController implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         FixedDelayPollingScheduler scheduler = new FixedDelayPollingScheduler(60000, 30000, true);
-        URLConfigurationSource urlConfigurationSource = new URLConfigurationSource("http://localhost:9090/config.properties");
+        URLConfigurationSource urlConfigurationSource = new URLConfigurationSource("http://localhost:7089/config.properties");
         DynamicConfiguration configuration = new DynamicConfiguration(urlConfigurationSource, scheduler);
         ConfigurationManager.install(configuration);
-        System.out.println(DynamicPropertyFactory.getInstance().getStringProperty("demo.url.user.name", "yanrc11").getValue());
 
     }
 }

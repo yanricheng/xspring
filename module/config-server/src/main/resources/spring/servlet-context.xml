@@ -31,19 +31,19 @@
 
 
     <dubbo:application name="spring-server"/>
-    <dubbo:registry address="${dubbo.registry}" /> <!--client="curator"-->
-    <dubbo:protocol name="dubbo"  port="${dubbo.port}"  host="${dubbo.host}" threadpool="fixed" threads="200"/>
+    <dubbo:registry address="${dubbo.registry}"/> <!--client="curator"-->
+    <dubbo:protocol name="dubbo" port="${dubbo.port}" host="${dubbo.host}" threadpool="fixed" threads="200"/>
 
-    <dubbo:service ref="configPropertityService" version="1.0.0"  timeout="30000"
+    <dubbo:service ref="configPropertityService" version="1.0.0" timeout="30000"
                    interface="net.yanrc.xpring.rpc.service.ConfigPropertityService"/>
     <bean id="configPropertityService" class="net.yanrc.xpring.rpc.service.impl.ConfigPropertityServiceImpl"/>
 
     <!-- 通用缓存处理-->
-    <cache:annotation-driven  error-handler="errorHandler"/>
-    <bean id="errorHandler" class="net.yanrc.xpring.common.utils.cache.FixedCacheErrorHandler" />
+    <cache:annotation-driven error-handler="errorHandler"/>
+    <bean id="errorHandler" class="net.yanrc.xpring.common.utils.cache.FixedCacheErrorHandler"/>
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
-        <property name="usePrefix" value="true" />
+        <property name="usePrefix" value="true"/>
         <property name="defaultExpiration" value="216000"/><!-- 1小时 -->
         <property name="expires">
             <map>
@@ -157,7 +157,7 @@
 
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/static/**" location="/static/"/>
 
     <!-- 页面跳转控制-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -227,5 +227,8 @@
         </property>
     </bean>
 
+    <bean class="net.yanrc.xpring.component.JdbcConfigComponent">
+        <constructor-arg index="0" ref="dataSource"/>
+    </bean>
 
 </beans>
