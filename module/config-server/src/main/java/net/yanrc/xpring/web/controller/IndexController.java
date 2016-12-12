@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class IndexController implements InitializingBean {
+
+    @RequestMapping(value = "/api/index", method = RequestMethod.GET)
+    public String index1() {
+        System.out.println(DynamicPropertyFactory.getInstance().getStringProperty("demo.url.user.name", "yanrc11").getValue());
+        return "home";
+    }
+
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index() {
         System.out.println(DynamicPropertyFactory.getInstance().getStringProperty("demo.url.user.name", "yanrc11").getValue());
