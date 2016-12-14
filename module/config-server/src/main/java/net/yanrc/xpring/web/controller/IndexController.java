@@ -1,6 +1,7 @@
 package net.yanrc.xpring.web.controller;
 
 import com.netflix.config.DynamicPropertyFactory;
+import net.yanrc.xpring.dal.entity.ConfigPropertity;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.functions.Func2;
+import rx.observables.AsyncOnSubscribe;
+import rx.observables.BlockingObservable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +40,87 @@ public class IndexController implements InitializingBean {
         return "home";
     }
 
+    @RequestMapping(value = "demo6", method = RequestMethod.GET)
+    public String demo6() {
+        ConfigPropertity  cp = new ConfigPropertity();
+        Observable<ConfigPropertity> observable = Observable.just(cp);
+        BlockingObservable<ConfigPropertity> blaBlockingObservable = observable.toBlocking();
+        blaBlockingObservable.forEach(new Action1<ConfigPropertity>() {
+            @Override
+            public void call(ConfigPropertity s) {
+                logger.info("demo6,call");
+            }
+        });
+
+        blaBlockingObservable.subscribe(new Observer<ConfigPropertity>() {
+            @Override
+            public void onCompleted() {
+                logger.info("demo6,onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onNext(ConfigPropertity s) {
+                logger.info("demo6 onNext={}", s);
+            }
+        });
+        blaBlockingObservable.subscribe(new Observer<ConfigPropertity>() {
+            @Override
+            public void onCompleted() {
+                logger.info("demo6-1,onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onNext(ConfigPropertity s) {
+                logger.info("demo6-1 onNext={}", s);
+            }
+        });
+        blaBlockingObservable.subscribe(new Observer<ConfigPropertity>() {
+            @Override
+            public void onCompleted() {
+                logger.info("demo6-2,onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onNext(ConfigPropertity s) {
+                logger.info("demo6-2 onNext={}", s);
+            }
+        });
+        blaBlockingObservable.subscribe(new Observer<ConfigPropertity>() {
+            @Override
+            public void onCompleted() {
+                logger.info("demo6-3,onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onNext(ConfigPropertity s) {
+                logger.info("demo6-3 onNext={}", s);
+            }
+        });
+
+        logger.info("demo6 finish");
+        return "home";
+    }
+
     @RequestMapping(value = "demo5", method = RequestMethod.GET)
     public String demo5() {
-        Observable<Integer> observable1 = Observable.just(1, 3, 5,7);
-        Observable<Integer> observable2 = Observable.just(2, 4, 6, 9,10);
+        Observable<Integer> observable1 = Observable.just(1, 3, 5, 7);
+        Observable<Integer> observable2 = Observable.just(2, 4, 6, 9, 10);
         Observable.zip(observable1, observable2, new Func2<Integer, Integer, Integer>() {
             @Override
             public Integer call(Integer integer, Integer integer2) {
