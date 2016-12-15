@@ -13,6 +13,7 @@
         <module>./bundle</module>
         <module>./module</module>
         <module>./web</module>
+        <module>./gateway</module>
     </modules>
 
 </project>
