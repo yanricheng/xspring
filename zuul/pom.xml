@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.yanrc</groupId>
-    <artifactId>xpring-gateway</artifactId>
-    <name>xpring::gateway</name>
+    <artifactId>xpring-zuul</artifactId>
+    <name>xpring::zuul</name>
     <packaging>war</packaging>
     <version>1.0.0</version>
 
@@ -58,6 +58,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zuul</artifactId>
+            <version>1.2.3.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.netflix.zuul</groupId>
             <artifactId>zuul-core</artifactId>
             <version>1.3.0</version>
@@ -110,7 +116,7 @@
                 <version>2.1</version>
                 <configuration>
                     <path>/</path>
-                    <port>8090</port>
+                    <port>8080</port>
                     <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
@@ -121,7 +127,7 @@
                 <version>9.2.10.v20150310</version>
                 <configuration>
                     <httpConnector>
-                        <port>8090</port>
+                        <port>8080</port>
                     </httpConnector>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
