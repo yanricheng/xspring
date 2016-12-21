@@ -3,14 +3,17 @@ package net.yanrc.xpring.web.controller;
 import com.google.common.collect.Lists;
 import com.netflix.config.DynamicPropertyFactory;
 import net.yanrc.app.common.util.JsonUtils;
+import net.yanrc.xpring.component.KafkaMsgComponent;
 import net.yanrc.xpring.dal.entity.ConfigPropertity;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -19,6 +22,7 @@ import rx.functions.Func2;
 import rx.observables.BlockingObservable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +31,15 @@ import java.util.List;
 @Controller
 public class IndexController implements InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+    @Autowired
+    private KafkaMsgComponent kafkaMsgComponent;
+
+    @RequestMapping(value = "/api/sendMsg", method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String sendMsg() {
+        kafkaMsgComponent.sendMsg(new Date().toLocaleString());
+        return "ok";
+    }
 
     @RequestMapping(value = "/api/index", method = RequestMethod.GET)
     public String index1() {

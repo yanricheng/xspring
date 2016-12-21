@@ -231,4 +231,6 @@
         <constructor-arg index="0" ref="dataSource"/>
     </bean>
 
+    <bean class="net.yanrc.xpring.component.KafkaMsgComponent" init-method="init" destroy-method="destroy"/>
+
 </beans>
