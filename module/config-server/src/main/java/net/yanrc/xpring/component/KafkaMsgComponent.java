@@ -1,5 +1,6 @@
 package net.yanrc.xpring.component;
 
+import net.yanrc.app.common.util.JsonUtils;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -16,6 +17,9 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 import org.springframework.kafka.listener.MessageListener;
 import org.springframework.kafka.listener.config.ContainerProperties;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +36,20 @@ public class KafkaMsgComponent {
 
 
     public void sendMsg(String value) {
-        template.sendDefault(value);
+        ListenableFuture<SendResult<Integer, String>> future = template.sendDefault(value);
+        future.addCallback(new ListenableFutureCallback<SendResult<Integer, String>>() {
+
+            @Override
+            public void onSuccess(SendResult<Integer, String> result) {
+                logger.info("消息发送成功：{}", JsonUtils.fromObject(result));
+            }
+
+            @Override
+            public void onFailure(Throwable ex) {
+                logger.info("消息发送失败", ex);
+            }
+
+        });
         template.flush();
     }
 
