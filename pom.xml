@@ -14,6 +14,19 @@
         <module>./module</module>
         <module>./web</module>
         <module>./gateway</module>
+        <module>./zuul</module>
+        <module>./zuul-gateway</module>
+        <module>./zuul-movie</module>
+        <module>./eureka-simple/compute-service</module>
+        <module>./eureka-simple/compute-service2</module>
+        <module>./eureka-simple/eureka-server</module>
+        <module>./eureka-simple/eureka-ribbon</module>
+        <module>./eureka-simple/eureka-feign</module>
+
+        <module>./eureka-cluster/api-gateway</module>
+        <module>./eureka-cluster/eureka-server</module>
+        <module>./eureka-cluster/service-A</module>
+        <module>./eureka-cluster/service-B</module>
     </modules>
 
 </project>

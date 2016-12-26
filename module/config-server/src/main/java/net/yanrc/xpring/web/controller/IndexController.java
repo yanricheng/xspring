@@ -1,24 +1,28 @@
 package net.yanrc.xpring.web.controller;
 
+import com.google.common.collect.Lists;
 import com.netflix.config.DynamicPropertyFactory;
+import net.yanrc.app.common.util.JsonUtils;
+import net.yanrc.xpring.component.KafkaMsgComponent;
 import net.yanrc.xpring.dal.entity.ConfigPropertity;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.functions.Func2;
-import rx.observables.AsyncOnSubscribe;
 import rx.observables.BlockingObservable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +31,15 @@ import java.util.List;
 @Controller
 public class IndexController implements InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+    @Autowired
+    private KafkaMsgComponent kafkaMsgComponent;
+
+    @RequestMapping(value = "/api/sendMsg", method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String sendMsg() {
+        kafkaMsgComponent.sendMsg(new Date().toLocaleString());
+        return "ok";
+    }
 
     @RequestMapping(value = "/api/index", method = RequestMethod.GET)
     public String index1() {
@@ -42,20 +55,38 @@ public class IndexController implements InitializingBean {
 
     @RequestMapping(value = "demo6", method = RequestMethod.GET)
     public String demo6() {
-        ConfigPropertity  cp = new ConfigPropertity();
-        Observable<ConfigPropertity> observable = Observable.just(cp);
+        List<ConfigPropertity> list = Lists.newArrayList();
+        ConfigPropertity  cp_1 = new ConfigPropertity();
+        cp_1.setId(1L);
+        cp_1.setConfigKey("name");
+        list.add(cp_1);
+
+        ConfigPropertity  cp_2 = new ConfigPropertity();
+        cp_2.setId(2L);
+        cp_2.setConfigKey("psd");
+        list.add(cp_2);
+
+        Observable<ConfigPropertity> observable = Observable.from(list);
+
         BlockingObservable<ConfigPropertity> blaBlockingObservable = observable.toBlocking();
-        blaBlockingObservable.forEach(new Action1<ConfigPropertity>() {
-            @Override
-            public void call(ConfigPropertity s) {
-                logger.info("demo6,call");
-            }
-        });
+
+//        (new Action1<ConfigPropertity>() {
+//            @Override
+//            public void call(ConfigPropertity s) {
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                cp.setLastEditTime(new Date());
+//                logger.info("demo6,call");
+//            }
+//        });
 
         blaBlockingObservable.subscribe(new Observer<ConfigPropertity>() {
             @Override
             public void onCompleted() {
-                logger.info("demo6,onCompleted");
+                logger.info("demo6,onCompleted,{}",this);
             }
 
             @Override
@@ -64,13 +95,20 @@ public class IndexController implements InitializingBean {
 
             @Override
             public void onNext(ConfigPropertity s) {
-                logger.info("demo6 onNext={}", s);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                s.setConfigValue("yanrc1");
+                logger.info("demo6 onNext={}", JsonUtils.fromObject(s));
             }
         });
+
         blaBlockingObservable.subscribe(new Observer<ConfigPropertity>() {
             @Override
             public void onCompleted() {
-                logger.info("demo6-1,onCompleted");
+                logger.info("demo6-1,onCompleted,{}",this);
             }
 
             @Override
@@ -79,13 +117,20 @@ public class IndexController implements InitializingBean {
 
             @Override
             public void onNext(ConfigPropertity s) {
-                logger.info("demo6-1 onNext={}", s);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                s.setConfigValue("yanrc2");
+                logger.info("demo6 onNext={}", JsonUtils.fromObject(s));
             }
         });
+
         blaBlockingObservable.subscribe(new Observer<ConfigPropertity>() {
             @Override
             public void onCompleted() {
-                logger.info("demo6-2,onCompleted");
+                logger.info("demo6-2,onCompleted,{}",this);
             }
 
             @Override
@@ -94,13 +139,20 @@ public class IndexController implements InitializingBean {
 
             @Override
             public void onNext(ConfigPropertity s) {
-                logger.info("demo6-2 onNext={}", s);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                s.setConfigValue("yanrc3");
+                logger.info("demo6 onNext={}", JsonUtils.fromObject(s));
             }
         });
+
         blaBlockingObservable.subscribe(new Observer<ConfigPropertity>() {
             @Override
             public void onCompleted() {
-                logger.info("demo6-3,onCompleted");
+                logger.info("demo6-3,onCompleted,{}",this);
             }
 
             @Override
@@ -109,9 +161,18 @@ public class IndexController implements InitializingBean {
 
             @Override
             public void onNext(ConfigPropertity s) {
-                logger.info("demo6-3 onNext={}", s);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                s.setConfigValue("yanrc4");
+                logger.info("demo6 onNext={}", JsonUtils.fromObject(s));
             }
         });
+
+        ConfigPropertity configPropertity =  blaBlockingObservable.first();
+        logger.info("demo6 end={}",JsonUtils.fromObject(configPropertity));
 
         logger.info("demo6 finish");
         return "home";
@@ -119,14 +180,27 @@ public class IndexController implements InitializingBean {
 
     @RequestMapping(value = "demo5", method = RequestMethod.GET)
     public String demo5() {
-        Observable<Integer> observable1 = Observable.just(1, 3, 5, 7);
-        Observable<Integer> observable2 = Observable.just(2, 4, 6, 9, 10);
-        Observable.zip(observable1, observable2, new Func2<Integer, Integer, Integer>() {
-            @Override
-            public Integer call(Integer integer, Integer integer2) {
-                return integer + integer2;
-            }
-        })
+        Observable<Integer> observable1 = Observable.just(1, 3, 5);
+        Observable<Integer> observable2 = Observable.just(2, 4, 6);
+        Observable<Integer> observable3 = Observable.just(7,8,9);
+
+        Observable.amb( observable2,observable3,observable1)
+
+//        Observable.combineLatest(observable1, observable2, new Func2<Integer, Integer, Integer>() {
+//            @Override
+//            public Integer call(Integer integer, Integer integer2) {
+//                return integer + integer2;
+//            }
+//        })
+
+//        Observable.merge(observable1,observable2).startWith(5)
+
+//        Observable.zip(observable1, observable2, new Func2<Integer, Integer, Integer>() {
+//            @Override
+//            public Integer call(Integer integer, Integer integer2) {
+//                return integer + integer2;
+//            }
+//        })
                 .subscribe(new Observer<Integer>() {
                     @Override
                     public void onCompleted() {
@@ -245,10 +319,10 @@ public class IndexController implements InitializingBean {
 //            }
 //        });
 ////
-//        String[] froms = {"1","2","3","4","5","6","7","8","9","a","b","c"};
-//        observable = Observable.from(froms);
+        String[] froms = {"1","2","3","4","5","6","7","8","9","a","b","c"};
+        observable = Observable.from(froms);
 
-        observable = Observable.just("11", "22");
+//        observable = Observable.just("11", "22");
 
         observable.subscribe(new Observer<String>() {
             @Override
@@ -269,6 +343,7 @@ public class IndexController implements InitializingBean {
                 }
             }
         });
+
         observable.subscribe(new Observer<String>() {
             @Override
             public void onCompleted() {
