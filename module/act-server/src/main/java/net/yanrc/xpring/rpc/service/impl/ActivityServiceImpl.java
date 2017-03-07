@@ -43,11 +43,11 @@ public class ActivityServiceImpl implements ActivityService {
     @Transactional(readOnly = true)
     @Override
     public Result<Activity> getById(Integer id) {
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(1500);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
 //          throw new HystrixBadRequestException("exxx");
 

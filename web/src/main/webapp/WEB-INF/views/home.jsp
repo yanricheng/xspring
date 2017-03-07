@@ -10,5 +10,17 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<h3>This is a header</h3>
+<p>This is a paragraph.</p>
+
+<div style="color:#00FF00">
+	<h3>This is a header</h3>
+	<p>This is a paragraph.</p>
+</div>
+
+
 </body>
 </html>
+
+

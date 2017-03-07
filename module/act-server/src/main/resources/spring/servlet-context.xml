@@ -30,9 +30,9 @@
     <context:annotation-config/>
 
 
-    <dubbo:application name="spring-server"/>
+    <dubbo:application name="act-server"/>
     <dubbo:registry address="${dubbo.registry}" /> <!--client="curator"-->
-    <dubbo:protocol name="dubbo"  port="${dubbo.port}"  host="${dubbo.host}" threadpool="fixed" threads="200"/>
+    <dubbo:protocol name="dubbo"  port="${dubbo.port}" threadpool="fixed" threads="200"/>
     <dubbo:service ref="activityService" version="1.0.0"  timeout="30000"
                    interface="net.yanrc.xpring.rpc.service.ActivityService"/>
     <bean id="activityService" class="net.yanrc.xpring.rpc.service.impl.ActivityServiceImpl"/>

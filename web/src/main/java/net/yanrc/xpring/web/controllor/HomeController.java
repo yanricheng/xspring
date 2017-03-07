@@ -33,7 +33,7 @@ import java.util.Locale;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+public class                                                                                                                HomeController {
     static final String key = "c_yanrc";
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
     @Autowired
