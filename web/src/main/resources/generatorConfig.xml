@@ -21,7 +21,7 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 		<!-- generate Model -->
-		<javaModelGenerator targetPackage="net.yanrc.xpring.dal.entity"
+		<javaModelGenerator targetPackage="net.yanrc.xpring.dal.domain"
 			targetProject="src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />

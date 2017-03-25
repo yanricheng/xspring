@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="net.yanrc.xpring.dal.mapper.ActivityMapper">
-    <resultMap id="BaseResultMap" type="net.yanrc.xpring.dal.entity.Activity">
+    <resultMap id="BaseResultMap" type="net.yanrc.xpring.dal.domain.Activity">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
@@ -21,7 +21,7 @@
     last_editor, last_edit_time
   </sql>
 
-    <insert id="insert" parameterType="net.yanrc.xpring.dal.entity.Activity" useGeneratedKeys="true" keyColumn="id"
+    <insert id="insert" parameterType="net.yanrc.xpring.dal.domain.Activity" useGeneratedKeys="true" keyColumn="id"
             keyProperty="id">
     insert into activity (id, type, is_delete, 
       status, title, name, 
@@ -35,7 +35,7 @@
       )
   </insert>
 
-    <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.entity.Activity" useGeneratedKeys="true"
+    <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.domain.Activity" useGeneratedKeys="true"
             keyColumn="id" keyProperty="id">
         insert into activity
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -122,7 +122,7 @@
     </delete>
 
 
-    <update id="updateByPrimaryKeySelective" parameterType="net.yanrc.xpring.dal.entity.Activity">
+    <update id="updateByPrimaryKeySelective" parameterType="net.yanrc.xpring.dal.domain.Activity">
         update activity
         <set>
             <if test="type != null">
@@ -162,7 +162,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="net.yanrc.xpring.dal.entity.Activity">
+    <update id="updateByPrimaryKey" parameterType="net.yanrc.xpring.dal.domain.Activity">
     update activity
     set type = #{type,jdbcType=INTEGER},
       is_delete = #{isDelete,jdbcType=INTEGER},

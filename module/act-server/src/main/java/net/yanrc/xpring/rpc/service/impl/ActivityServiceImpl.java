@@ -2,7 +2,7 @@ package net.yanrc.xpring.rpc.service.impl;
 
 import net.yanrc.app.common.result.DefaultResult;
 import net.yanrc.app.common.result.Result;
-import net.yanrc.xpring.dal.entity.Activity;
+import net.yanrc.xpring.dal.domain.Activity;
 import net.yanrc.xpring.rpc.manger.ActivityManager;
 import net.yanrc.xpring.rpc.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;

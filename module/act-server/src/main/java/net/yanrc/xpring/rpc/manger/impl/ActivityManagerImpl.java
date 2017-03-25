@@ -1,7 +1,7 @@
 package net.yanrc.xpring.rpc.manger.impl;
 
 import net.yanrc.xpring.common.utils.anots.Logable;
-import net.yanrc.xpring.dal.entity.Activity;
+import net.yanrc.xpring.dal.domain.Activity;
 import net.yanrc.xpring.dal.mapper.ActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;

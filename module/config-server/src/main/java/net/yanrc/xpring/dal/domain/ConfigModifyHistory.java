@@ -1,4 +1,4 @@
-package net.yanrc.xpring.dal.entity;
+package net.yanrc.xpring.dal.domain;
 
 import net.yanrc.xpring.rpc.model.ConfigModifyHistoryModel;
 

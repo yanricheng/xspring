@@ -1,6 +1,6 @@
 package net.yanrc.xpring.rpc.manger.impl;
 
-import net.yanrc.xpring.dal.entity.ConfigPropertity;
+import net.yanrc.xpring.dal.domain.ConfigPropertity;
 import net.yanrc.xpring.dal.mapper.ConfigPropertityMapper;
 import net.yanrc.xpring.rpc.dto.query.ConfigPropertityQueryDto;
 import net.yanrc.xpring.rpc.manger.ConfigPropertityManager;

@@ -1,6 +1,6 @@
 package net.yanrc.xpring.builder;
 
-import net.yanrc.xpring.dal.entity.Activity;
+import net.yanrc.xpring.dal.domain.Activity;
 
 import java.util.Date;
 

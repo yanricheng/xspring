@@ -4,15 +4,9 @@ import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import net.yanrc.app.common.result.PresentResult;
 import net.yanrc.app.common.result.Result;
-import net.yanrc.xpring.dal.entity.Activity;
+import net.yanrc.xpring.dal.domain.Activity;
 import net.yanrc.xpring.rpc.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by Administrator on 2016/10/30.

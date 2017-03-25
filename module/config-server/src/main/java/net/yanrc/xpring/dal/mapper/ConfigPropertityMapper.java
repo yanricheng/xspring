@@ -1,6 +1,6 @@
 package net.yanrc.xpring.dal.mapper;
 
-import net.yanrc.xpring.dal.entity.ConfigPropertity;
+import net.yanrc.xpring.dal.domain.ConfigPropertity;
 import net.yanrc.xpring.rpc.dto.query.ConfigPropertityQueryDto;
 
 import java.util.List;

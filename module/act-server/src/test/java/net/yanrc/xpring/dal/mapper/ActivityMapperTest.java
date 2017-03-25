@@ -1,7 +1,7 @@
 package net.yanrc.xpring.dal.mapper;
 
 import net.yanrc.xpring.builder.ActivityBuilder;
-import net.yanrc.xpring.dal.entity.Activity;
+import net.yanrc.xpring.dal.domain.Activity;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;

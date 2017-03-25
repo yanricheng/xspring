@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.netflix.config.DynamicPropertyFactory;
 import net.yanrc.app.common.util.JsonUtils;
 import net.yanrc.xpring.component.KafkaMsgComponent;
-import net.yanrc.xpring.dal.entity.ConfigPropertity;
+import net.yanrc.xpring.dal.domain.ConfigPropertity;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

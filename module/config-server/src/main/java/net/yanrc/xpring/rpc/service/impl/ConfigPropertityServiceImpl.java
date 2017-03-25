@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import net.yanrc.app.common.result.AbsentResult;
 import net.yanrc.app.common.result.PresentResult;
 import net.yanrc.app.common.result.Result;
-import net.yanrc.xpring.dal.entity.ConfigPropertity;
+import net.yanrc.xpring.dal.domain.ConfigPropertity;
 import net.yanrc.xpring.rpc.dto.query.ConfigPropertityQueryDto;
 import net.yanrc.xpring.rpc.manger.ConfigPropertityManager;
 import net.yanrc.xpring.rpc.model.ConfigModifyHistoryModel;

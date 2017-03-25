@@ -1,4 +1,4 @@
-package net.yanrc.xpring.dal.entity;
+package net.yanrc.xpring.dal.domain;
 
 import java.io.Serializable;
 import java.util.Date;

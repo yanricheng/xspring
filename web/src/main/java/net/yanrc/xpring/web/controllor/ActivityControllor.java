@@ -5,7 +5,7 @@ import net.yanrc.app.common.api.HeadEnum;
 import net.yanrc.app.common.result.Result;
 import net.yanrc.app.common.util.JsonUtils;
 import net.yanrc.xpring.common.utils.anots.Logable;
-import net.yanrc.xpring.dal.entity.Activity;
+import net.yanrc.xpring.dal.domain.Activity;
 import net.yanrc.xpring.rpc.service.ActivityService;
 import net.yanrc.xpring.web.biz.service.ActivityBizService;
 import org.slf4j.Logger;

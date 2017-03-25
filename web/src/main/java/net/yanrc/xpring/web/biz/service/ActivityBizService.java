@@ -1,17 +1,10 @@
 package net.yanrc.xpring.web.biz.service;
 
 import net.yanrc.app.common.result.Result;
-import net.yanrc.xpring.common.utils.anots.Logable;
-import net.yanrc.xpring.dal.entity.Activity;
+import net.yanrc.xpring.dal.domain.Activity;
 import net.yanrc.xpring.rpc.service.ActivityService;
-import net.yanrc.xpring.web.command.CommandFecade;
-import net.yanrc.xpring.web.command.activity.ActivitGetByIdCommond;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by yanricheng on 16-10-13.

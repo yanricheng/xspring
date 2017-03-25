@@ -1,6 +1,6 @@
 package net.yanrc.xpring.dal.mapper;
 
-import net.yanrc.xpring.dal.entity.ConfigModifyHistory;
+import net.yanrc.xpring.dal.domain.ConfigModifyHistory;
 
 public interface ConfigModifyHistoryMapper {
     int deleteByPrimaryKey(Long id);
