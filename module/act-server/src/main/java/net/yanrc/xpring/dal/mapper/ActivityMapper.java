@@ -4,7 +4,6 @@ import net.yanrc.xpring.common.utils.anots.Logable;
 import net.yanrc.xpring.dal.entity.Activity;
 
 import java.util.List;
-
 public interface ActivityMapper {
     int deleteByPrimaryKey(Integer id);
 

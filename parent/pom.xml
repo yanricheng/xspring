@@ -369,6 +369,15 @@
             <artifactId>mockito-all</artifactId>
             <version>1.10.19</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm-all</artifactId>
+            <version>4.2</version>
+            <!--<version>4.2</version>-->
+            <!--<version>5.2</version>-->
+        </dependency>
+
     </dependencies>
 
     <build>
