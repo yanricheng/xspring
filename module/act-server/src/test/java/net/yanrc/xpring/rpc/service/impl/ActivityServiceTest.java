@@ -1,18 +1,37 @@
 package net.yanrc.xpring.rpc.service.impl;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import static org.mockito.Mockito.argThat;
+import static org.mockito.Mockito.when;
 
-import java.io.IOException;
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.internal.matchers.GreaterThan;
+import org.mockito.internal.matchers.LessOrEqual;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import net.yanrc.xpring.rpc.manger.ActivityManager;
 
 /**
  * Created by yanricheng on 16-11-8.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ActivityServiceTest {
 
-    public static void main(String[] args) throws IOException {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:*/root-context.xml");
-        context.start();
+    @InjectMocks
+    private ActivityServiceImpl activityService;
+    @Mock
+    private ActivityManager activityManager;
 
-        System.in.read(); // 按任意键退出
+    @Test
+    public void removeTest() {
+        when(activityManager.remove(argThat(new LessOrEqual<>(0)))).thenReturn(false);
+        when(activityManager.remove(argThat(new GreaterThan<>(0)))).thenReturn(true);
+        Assertions.assertThat(activityService.remove(-1).isSuccess()).isFalse();
+        Assertions.assertThat(activityService.remove(0).isSuccess()).isFalse();
+        Assertions.assertThat(activityService.remove(1).isSuccess()).isTrue();
     }
+
 }

@@ -1,54 +1,66 @@
 package net.yanrc.xpring.dal.mapper;
 
-import net.yanrc.xpring.builder.ActivityBuilder;
-import net.yanrc.xpring.dal.domain.Activity;
-import org.apache.commons.lang.StringUtils;
+import java.util.Date;
+
 import org.apache.ibatis.session.SqlSession;
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-import java.util.Date;
+import net.yanrc.xpring.builder.ActivityBuilder;
+import net.yanrc.xpring.dal.domain.Activity;
+
+//import org.junit.Assert;
 
 /**
  * Created by yanricheng on 2017/3/25.
  */
 public class ActivityMapperTest extends BaseMapper {
-
-    private int id1;
-    private int id2;
-
-    private Activity act1;
-    private Activity act2;
-
     @Test
     public void testInsert() {
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        ActivityBuilder activityBuilder = ActivityBuilder.newInstance();
-        Date now = new Date();
-        activityBuilder.name("慧子").isDelete(0).status(1).type(1)
-                .creator("huizi").createTime(now).lastEditor("huizi")
-                .lastEditTime(now);
-
         ActivityMapper activityMapper = sqlSession.getMapper(ActivityMapper.class);
         try {
-            Activity activity = activityBuilder.build();
-            int count1 = activityMapper.insert(activity);
-            Assert.assertTrue(count1 > 0);
-            id1 = activity.getId();
+            Date now = new Date();
+            ActivityBuilder activityBuilder1 = ActivityBuilder.newInstance();
+            activityBuilder1.name("慧子1").isDelete(0).status(1).type(1).creator("huizi1").createTime(now)
+                    .lastEditor("huizi").lastEditTime(now);
+            Activity activity1 = activityBuilder1.build();
+            Assertions.assertThat(activityMapper.insert(activity1) > 0).isTrue();
+            Assertions.assertThat(activity1.getId() > 0).isTrue();
 
-            activity.setId(null);
-            int count2 = activityMapper.insert(activity);
-            Assert.assertTrue(count2 > 0);
-            id2 = activity.getId();
+            ActivityBuilder activityBuilder2 = ActivityBuilder.newInstance();
+            activityBuilder2.isDelete(0).status(1).type(1).name("慧子2").creator("huizi2").createTime(now)
+                    .lastEditor("huizi").lastEditTime(now);
+            Activity activity2 = activityBuilder2.build();
+            Assertions.assertThat(activityMapper.insert(activity2) > 0).isTrue();
+            Assertions.assertThat(activity2.getId() > 0).isTrue();
+        } finally {
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+    }
 
-            act1 = activityMapper.selectByPrimaryKey(id1);
-            Assert.assertNotNull(act1);
-
-            act2 = activityMapper.selectByPrimaryKey(id2);
-            Assert.assertNotNull(act2);
-            Assert.assertTrue(StringUtils.isNotBlank(act1.getName()));
-            Assert.assertTrue(StringUtils.endsWith(act1.getName(), act2.getName()));
-
+    @Test
+    public void testSelect() {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        ActivityMapper activityMapper = sqlSession.getMapper(ActivityMapper.class);
+        try {
+            Date now = new Date();
+            ActivityBuilder activityBuilder1 = ActivityBuilder.newInstance();
+            activityBuilder1.name("日成").isDelete(0).status(1).type(1).creator("richeng").createTime(now)
+                    .lastEditor("richeng").lastEditTime(now);
+            Activity activity = activityBuilder1.build();
+            Assertions.assertThat(activityMapper.insert(activity) > 0).isTrue();
+            Activity act1 = activityMapper.selectByPrimaryKey(activity.getId());
+            Assertions.assertThat(act1.getName().equalsIgnoreCase("日成")).isTrue();
+            Assertions.assertThat(act1.getCreator().equalsIgnoreCase("richeng")).isTrue();
+            Assertions.assertThat(act1.getLastEditor().equalsIgnoreCase("richeng")).isTrue();
+            Assertions.assertThat(act1.getCreateTime().getTime() == now.getTime()).isTrue();
+            Assertions.assertThat(act1.getLastEditTime().getTime() == now.getTime()).isTrue();
+            Assertions.assertThat(act1.getIsDelete() == 0).isTrue();
+            Assertions.assertThat(act1.getStatus() == 1).isTrue();
+            Assertions.assertThat(act1.getType() == 1).isTrue();
         } finally {
             if (sqlSession != null) {
                 sqlSession.close();

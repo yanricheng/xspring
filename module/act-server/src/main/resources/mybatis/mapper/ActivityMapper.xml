@@ -23,14 +23,14 @@
 
     <insert id="insert" parameterType="net.yanrc.xpring.dal.domain.Activity" useGeneratedKeys="true" keyColumn="id"
             keyProperty="id">
-    insert into activity (id, type, is_delete, 
-      status, title, name, 
-      start_time, end_time, creator, 
+    insert into activity (id, type, is_delete,
+      status, title, name,
+      start_time, end_time, creator,
       create_time, last_editor, last_edit_time
       )
-    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER},
+      #{status,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{lastEditor,jdbcType=VARCHAR}, #{lastEditTime,jdbcType=TIMESTAMP}
       )
   </insert>

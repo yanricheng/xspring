@@ -1,15 +1,16 @@
 package net.yanrc.xpring.rpc.manger.impl;
 
-import net.yanrc.xpring.common.utils.anots.Logable;
-import net.yanrc.xpring.dal.domain.Activity;
-import net.yanrc.xpring.dal.mapper.ActivityMapper;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import net.yanrc.xpring.common.utils.anots.Logable;
+import net.yanrc.xpring.dal.domain.Activity;
+import net.yanrc.xpring.dal.mapper.ActivityMapper;
 
 /**
  * Created by yanricheng on 16-10-13.
@@ -42,6 +43,9 @@ public class ActivityManagerImpl implements net.yanrc.xpring.rpc.manger.Activity
     @CacheEvict(value = "default", key = "#p0")
     @Override
     public boolean remove(Integer id) {
+        if (id == null || id.intValue() <= 0) {
+            return false;
+        }
         return activityMapper.deleteByPrimaryKey(id) > 0;
     }
 
@@ -70,7 +74,6 @@ public class ActivityManagerImpl implements net.yanrc.xpring.rpc.manger.Activity
     public Activity getById(Integer id) {
         return activityMapper.selectByPrimaryKey(id);
     }
-
 
     @Cacheable(value = "activity", key = "T(net.yanrc.xpring.rpc.Constants).ALL")
     @Override

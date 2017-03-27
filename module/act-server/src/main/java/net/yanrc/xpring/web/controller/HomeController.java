@@ -15,7 +15,7 @@ import java.util.Map;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = "/aaa", method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/aaa"}, method = RequestMethod.GET)
     @ResponseBody
     public String index(@RequestParam(value = "name") String name) {
         Map map = Maps.newHashMap();

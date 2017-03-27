@@ -1,12 +1,12 @@
 package net.yanrc.xpring.web.controller;
 
-import net.yanrc.app.common.api.ApiResponse;
-import net.yanrc.app.common.api.HeadEnum;
-import net.yanrc.app.common.result.Result;
-import net.yanrc.app.common.util.JsonUtils;
-import net.yanrc.xpring.common.utils.anots.Logable;
-import net.yanrc.xpring.dal.domain.Activity;
-import net.yanrc.xpring.rpc.service.ActivityService;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
+import net.yanrc.app.common.api.ApiResponse;
+import net.yanrc.app.common.api.HeadEnum;
+import net.yanrc.app.common.result.Result;
+import net.yanrc.app.common.util.JsonUtils;
+import net.yanrc.xpring.common.utils.anots.Logable;
+import net.yanrc.xpring.dal.domain.Activity;
+import net.yanrc.xpring.rpc.service.ActivityService;
 
 /**
  * ActivityControllor
@@ -50,14 +54,23 @@ public class ActivityControllor {
 
     @RequestMapping(value = "/act/remove", method = RequestMethod.GET)
     @ResponseBody
-    public String remove(@RequestParam(required = true, name = "id") int id) {
-        Result<Boolean> activityResult = activityService.remove(id);
+    public ApiResponse remove(@RequestParam(required = true, name = "id") String id, HttpServletRequest request,
+            HttpServletResponse response) {
+        if(StringUtils.isBlank(id)){
+            return new ApiResponse<Boolean>(HeadEnum.PARAMETER_BLANK.newHead());
+        }
+
+        if(!StringUtils.isNumeric(id)){
+            return new ApiResponse<Boolean>(HeadEnum.PARAMETER_ILLEAGAL.newHead());
+        }
+
+        Result<Boolean> activityResult = activityService.remove(Long.valueOf(id).intValue());
         if (activityResult.isSuccess()) {
-            return JsonUtils.fromObject(new ApiResponse<Boolean>(activityResult));
+            return new ApiResponse<Boolean>(activityResult);
         }
 
         logger.warn("ActivityControllor.remove fail,op result:{}", JsonUtils.fromObject(activityResult));
-        return JsonUtils.fromObject(new ApiResponse<Activity>(HeadEnum.SERVER_ERROR.newHead()));
+        return new ApiResponse<Activity>(HeadEnum.SERVER_ERROR.newHead());
     }
 
     @RequestMapping(value = "/act/edit", method = RequestMethod.GET)
@@ -75,13 +88,15 @@ public class ActivityControllor {
         return JsonUtils.fromObject(new ApiResponse<Activity>(HeadEnum.SERVER_ERROR.newHead()));
     }
 
-    @Logable(start=true,end = false)
+    @Logable(start = true, end = false)
     @RequestMapping(value = "/act/get", method = RequestMethod.GET)
     @ResponseBody
     public String get(@RequestParam(required = true, name = "id") int id,
-                      @RequestParam(required = false, name = "name") String name,
-                      HttpServletRequest request) throws UnsupportedEncodingException {
-//        String str= new String(request.getParameter("name").toString().getBytes("iso8859_1"), "UTF-8");
+            @RequestParam(required = false, name = "name") String name, HttpServletRequest request)
+            throws UnsupportedEncodingException {
+        // String str= new
+        // String(request.getParameter("name").toString().getBytes("iso8859_1"),
+        // "UTF-8");
         Result<Activity> activityResult = activityService.getById(id);
         if (activityResult.isSuccess()) {
             return JsonUtils.fromObject(new ApiResponse<Activity>(activityResult));
