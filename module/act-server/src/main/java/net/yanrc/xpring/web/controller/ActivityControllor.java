@@ -52,15 +52,41 @@ public class ActivityControllor {
         return JsonUtils.fromObject(new ApiResponse<Activity>(HeadEnum.SERVER_ERROR.newHead()));
     }
 
-    @RequestMapping(value = "/act/remove", method = RequestMethod.GET)
+    @RequestMapping(value = "/act/remove", method = RequestMethod.GET, headers = "Accept=text/plain")
     @ResponseBody
     public ApiResponse remove(@RequestParam(required = true, name = "id") String id, HttpServletRequest request,
             HttpServletResponse response) {
-        if(StringUtils.isBlank(id)){
+        if (StringUtils.isBlank(id)) {
             return new ApiResponse<Boolean>(HeadEnum.PARAMETER_BLANK.newHead());
         }
 
-        if(!StringUtils.isNumeric(id)){
+        if (!StringUtils.isNumeric(id)) {
+            return new ApiResponse<Boolean>(HeadEnum.PARAMETER_ILLEAGAL.newHead());
+        }
+
+        Result<Boolean> activityResult = activityService.remove(Long.valueOf(id).intValue());
+        if (activityResult.isSuccess()) {
+            return new ApiResponse<Boolean>(activityResult);
+        }
+
+        logger.warn("ActivityControllor.remove fail,op result:{}", JsonUtils.fromObject(activityResult));
+        return new ApiResponse<Activity>(HeadEnum.SERVER_ERROR.newHead());
+    }
+
+    @RequestMapping(value = "/simple/revisited", method = RequestMethod.GET)
+    public @ResponseBody String simple() {
+        return "Hello world revisited!";
+    }
+
+    @RequestMapping(value = "/act/delete", method = RequestMethod.GET)
+    @ResponseBody
+    public ApiResponse delete(@RequestParam(required = true, name = "id") String id, HttpServletRequest request,
+            HttpServletResponse response) {
+        if (StringUtils.isBlank(id)) {
+            return new ApiResponse<Boolean>(HeadEnum.PARAMETER_BLANK.newHead());
+        }
+
+        if (!StringUtils.isNumeric(id)) {
             return new ApiResponse<Boolean>(HeadEnum.PARAMETER_ILLEAGAL.newHead());
         }
 

@@ -40,7 +40,7 @@ public class ActivityManagerImpl implements net.yanrc.xpring.rpc.manger.Activity
         return null;
     }
 
-    @CacheEvict(value = "default", key = "#p0")
+    @CacheEvict(value = "default", key = "T(java.lang.String).valueOf(#p0)")
     @Override
     public boolean remove(Integer id) {
         if (id == null || id.intValue() <= 0) {
