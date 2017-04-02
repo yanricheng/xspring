@@ -2,7 +2,7 @@ package hystrix;
 
 import com.netflix.config.ConfigurationManager;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
-import net.yanrc.xpring.web.command.CommandFacadeWithPrimarySecondary;
+import net.yanrc.xpring.activity.web.command.CommandFacadeWithPrimarySecondary;
 import org.junit.Assert;
 import org.junit.Test;
 

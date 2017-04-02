@@ -1,6 +1,6 @@
 package hystrix;
 
-import net.yanrc.xpring.web.command.CommandWithStubbedFallback;
+import net.yanrc.xpring.activity.web.command.CommandWithStubbedFallback;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;

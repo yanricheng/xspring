@@ -1,6 +1,6 @@
 package xpring;
 
-import net.yanrc.xpring.web.biz.service.demo.IHello;
+import net.yanrc.xpring.activity.web.biz.service.demo.IHello;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 

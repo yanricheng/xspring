@@ -21,7 +21,7 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 		<!-- generate Model -->
-		<javaModelGenerator targetPackage="net.yanrc.xpring.dal.domain"
+		<javaModelGenerator targetPackage="net.yanrc.xpring.domain"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
@@ -37,24 +37,24 @@
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		
-		
-		<table schema="" 
+
+
+		<table schema=""
 			tableName="config_modify_history"
 			domainObjectName="ConfigModifyHistory"
 
-			enableCountByExample="false" 
+			enableCountByExample="false"
 			enableUpdateByExample="false"
-			enableDeleteByExample="false" 
+			enableDeleteByExample="false"
 			enableSelectByExample="false"
-			enableUpdateByPrimaryKey="true" 
+			enableUpdateByPrimaryKey="true"
 			enableDeleteByPrimaryKey="true"
-			selectByPrimaryKeyQueryId="false" 
+			selectByPrimaryKeyQueryId="false"
 			selectByExampleQueryId="false"
 			/>
-			
-			
-			
+
+
+
 
 	</context>
 </generatorConfiguration>

@@ -24,8 +24,8 @@
 
     <context:property-placeholder location="classpath:spring.properties"/>
 
-    <context:component-scan base-package="net.yanrc.xpring.rpc.manger"/>
-    <context:component-scan base-package="net.yanrc.xpring.rpc.service"/>
+    <context:component-scan base-package="net.yanrc.xpring.biz.manger"/>
+    <context:component-scan base-package="net.yanrc.xpring.biz.service"/>
     <context:component-scan base-package="net.yanrc.xpring.web.controller"/>
     <context:annotation-config/>
 
@@ -35,12 +35,12 @@
     <dubbo:protocol name="dubbo" port="${dubbo.port}" host="${dubbo.host}" threadpool="fixed" threads="200"/>
 
     <dubbo:service ref="configPropertityService" version="1.0.0" timeout="30000"
-                   interface="net.yanrc.xpring.rpc.service.ConfigPropertityService"/>
-    <bean id="configPropertityService" class="net.yanrc.xpring.rpc.service.impl.ConfigPropertityServiceImpl"/>
+                   interface="net.yanrc.xpring.activity.biz.service.ConfigPropertityService"/>
+    <bean id="configPropertityService" class="net.yanrc.xpring.activity.biz.service.impl.ConfigPropertityServiceImpl"/>
 
     <!-- 通用缓存处理-->
     <cache:annotation-driven error-handler="errorHandler"/>
-    <bean id="errorHandler" class="net.yanrc.xpring.common.utils.cache.FixedCacheErrorHandler"/>
+    <bean id="errorHandler" class="net.yanrc.xpring.activity.common.utils.cache.FixedCacheErrorHandler"/>
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
         <property name="usePrefix" value="true"/>
@@ -201,14 +201,14 @@
         </property>
     </bean>
 
-    <bean id="systemIntroduction" class="net.yanrc.xpring.common.utils.sys.SystemIntroduction"/>
+    <bean id="systemIntroduction" class="net.yanrc.xpring.activity.common.utils.sys.SystemIntroduction"/>
     <bean id="systemAdvisor"
           class="org.springframework.aop.support.DefaultIntroductionAdvisor">
         <constructor-arg index="0">
             <ref bean="systemIntroduction"/>
         </constructor-arg>
         <constructor-arg index="1">
-            <value>net.yanrc.xpring.common.utils.sys.SystemService</value>
+            <value>net.yanrc.xpring.activity.common.utils.sys.SystemService</value>
         </constructor-arg>
     </bean>
 
@@ -227,10 +227,10 @@
         </property>
     </bean>
 
-    <bean class="net.yanrc.xpring.component.JdbcConfigComponent">
+    <bean class="net.yanrc.xpring.activity.component.JdbcConfigComponent">
         <constructor-arg index="0" ref="dataSource"/>
     </bean>
 
-    <bean class="net.yanrc.xpring.component.KafkaMsgComponent" init-method="init" destroy-method="destroy"/>
+    <bean class="net.yanrc.xpring.activity.component.KafkaMsgComponent" init-method="init" destroy-method="destroy"/>
 
 </beans>

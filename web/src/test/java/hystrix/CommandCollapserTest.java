@@ -1,13 +1,6 @@
 package hystrix;
 
-import com.netflix.hystrix.HystrixCommand;
-import com.netflix.hystrix.HystrixEventType;
-import com.netflix.hystrix.HystrixRequestLog;
-import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
-import net.yanrc.xpring.web.command.CommandCollapserGetValueForKey;
 import org.junit.Test;
-
-import java.util.concurrent.Future;
 
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

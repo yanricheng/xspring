@@ -28,25 +28,25 @@
     <dubbo:registry address="${dubbo.registry}" client="curator" protocol="zookeeper"/>
     <!--<dubbo:protocol name="dubbo" threadpool="fixed" threads="200"/>-->
 
-	<dubbo:reference interface="net.yanrc.xpring.rpc.service.ActivityService" id="activityService"  version="1.0.0" timeout="10000"/>
+	<dubbo:reference interface="net.yanrc.xpring.activity.biz.service.ActivityService" id="activityService" version="1.0.0" timeout="10000"/>
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-    <bean class="net.yanrc.xpring.web.command.CommandFecade" autowire="byName"/>
+    <bean class="net.yanrc.xpring.activity.web.command.CommandFecade" autowire="byName"/>
 
-    <bean scope="prototype" id="activitGetByIdCommond" name="activitGetByIdCommond" class="net.yanrc.xpring.web.command.activity.ActivitGetByIdCommond" autowire="byType">
+    <bean scope="prototype" id="activitGetByIdCommond" name="activitGetByIdCommond" class="net.yanrc.xpring.activity.web.command.activity.ActivitGetByIdCommond" autowire="byType">
         <!--<property name="activityService" ref="activityService"></property>-->
     </bean>
 
 	<!--<bean id="logBeforeAdvice"
-		  class="net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice"/>
+		  claLogBeforeAdvicevice"/>
 
 	<bean id="helloSpeaker"
-		  class="net.yanrc.xpring.web.biz.service.demo.HelloSpeaker"/>
+		  claHelloSpeakeraker"/>
 
 	<bean id="helloSpeakerBean"
 		  class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="proxyInterfaces">
-			<value>net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice</value>
+			<vaLogBeforeAdvicevice</value>
 		</property>
 		<property name="target">
 			<ref bean="helloSpeaker"/>

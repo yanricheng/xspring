@@ -32,15 +32,16 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <property name="url"
-                          value="jdbc:mysql://localhost:3306/xspring?autoReconnect=true&amp;autoCommit=false&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="mysql"/>
+                          value="jdbc:mysql://${jdbc.host}:${jdbc.port}/xspring_unit?autoReconnect=true&amp;autoCommit=false&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+                <property name="username" value="${jdbc.name}"/>
+                <property name="password" value="${jdbc.psd}"/>
             </dataSource>
         </environment>
     </environments>
 
     <mappers>
         <mapper resource="mybatis/mapper/ActivityMapper.xml"/>
+        <mapper resource="mybatis/mapper/ParticipantorMapper.xml"/>
     </mappers>
 
 </configuration>

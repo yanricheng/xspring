@@ -1,7 +1,7 @@
 package hystrix;
 
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
-import net.yanrc.xpring.web.command.CommandUsingRequestCache;
+import net.yanrc.xpring.activity.web.command.CommandUsingRequestCache;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

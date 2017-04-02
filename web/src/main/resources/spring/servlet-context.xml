@@ -32,7 +32,7 @@
     <context:annotation-config/>
 
     <!-- utils-->
-    <bean id="configComponent" class="net.yanrc.xpring.component.config.ConfigComponent" >
+    <bean id="configComponent" class="net.yanrc.xpring.activity.component.config.ConfigComponent" >
         <constructor-arg index="0" value="${zookeeper.url}"/>
     </bean>
 
@@ -98,14 +98,14 @@
         </property>
     </bean>
 
-    <bean id="systemIntroduction" class="net.yanrc.xpring.common.utils.sys.SystemIntroduction"/>
+    <bean id="systemIntroduction" class="net.yanrc.xpring.activity.common.utils.sys.SystemIntroduction"/>
     <bean id="systemAdvisor"
           class="org.springframework.aop.support.DefaultIntroductionAdvisor">
         <constructor-arg index="0">
             <ref bean="systemIntroduction"/>
         </constructor-arg>
         <constructor-arg index="1">
-            <value>net.yanrc.xpring.common.utils.sys.SystemService</value>
+            <value>net.yanrc.xpring.activity.common.utils.sys.SystemService</value>
         </constructor-arg>
     </bean>
 

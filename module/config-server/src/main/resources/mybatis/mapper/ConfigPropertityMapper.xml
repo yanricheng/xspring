@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="net.yanrc.xpring.dal.mapper.ConfigPropertityMapper" >
-  <resultMap id="BaseResultMap" type="net.yanrc.xpring.dal.domain.ConfigPropertity" >
+<mapper namespace="net.yanrc.xpring.activity.dal.mapper.ConfigPropertityMapper" >
+  <resultMap id="BaseResultMap" type="net.yanrc.xpring.activity.domain.ConfigPropertity" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="app_id" property="appId" jdbcType="BIGINT" />
     <result column="env_id" property="envId" jdbcType="BIGINT" />
@@ -13,7 +13,7 @@
     <result column="last_edit_time" property="lastEditTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
-  <resultMap id="ResultMapWithBLOBs" type="net.yanrc.xpring.dal.domain.ConfigPropertity" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="net.yanrc.xpring.activity.domain.ConfigPropertity" extends="BaseResultMap" >
     <result column="config_value" property="configValue" jdbcType="LONGVARCHAR" />
   </resultMap>
 
@@ -45,7 +45,7 @@
     </where>
   </sql>
 
-  <select id="selectList" resultMap="ResultMapWithBLOBs" parameterType="net.yanrc.xpring.rpc.dto.query.ConfigPropertityQueryDto" >
+  <select id="selectList" resultMap="ResultMapWithBLOBs" parameterType="net.yanrc.xpring.activity.biz.dto.query.ConfigPropertityQueryDto" >
     select 'false' as QUERYID,
     <include refid="Base_Column_List" />
     ,
@@ -68,18 +68,18 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="net.yanrc.xpring.dal.domain.ConfigPropertity" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
-    insert into config_propertity (id, app_id, env_id, 
-      task_id, config_key, creator, 
-      create_time, last_editor, last_edit_time, 
+  <insert id="insert" parameterType="net.yanrc.xpring.activity.domain.ConfigPropertity" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+    insert into config_propertity (id, app_id, env_id,
+      task_id, config_key, creator,
+      create_time, last_editor, last_edit_time,
       config_value)
-    values (#{id,jdbcType=BIGINT}, #{appId,jdbcType=BIGINT}, #{envId,jdbcType=BIGINT}, 
-      #{taskId,jdbcType=BIGINT}, #{configKey,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{lastEditor,jdbcType=VARCHAR}, #{lastEditTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, #{appId,jdbcType=BIGINT}, #{envId,jdbcType=BIGINT},
+      #{taskId,jdbcType=BIGINT}, #{configKey,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{lastEditor,jdbcType=VARCHAR}, #{lastEditTime,jdbcType=TIMESTAMP},
       #{configValue,jdbcType=LONGVARCHAR})
   </insert>
 
-  <insert id="insertSelective" parameterType="net.yanrc.xpring.dal.domain.ConfigPropertity" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+  <insert id="insertSelective" parameterType="net.yanrc.xpring.activity.domain.ConfigPropertity" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     insert into config_propertity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -147,7 +147,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="net.yanrc.xpring.dal.domain.ConfigPropertity" >
+  <update id="updateByPrimaryKeySelective" parameterType="net.yanrc.xpring.activity.domain.ConfigPropertity" >
     update config_propertity
     <set >
       <if test="appId != null" >
@@ -181,7 +181,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.yanrc.xpring.dal.domain.ConfigPropertity" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.yanrc.xpring.activity.domain.ConfigPropertity" >
     update config_propertity
     set app_id = #{appId,jdbcType=BIGINT},
       env_id = #{envId,jdbcType=BIGINT},
@@ -195,7 +195,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="net.yanrc.xpring.dal.domain.ConfigPropertity" >
+  <update id="updateByPrimaryKey" parameterType="net.yanrc.xpring.activity.domain.ConfigPropertity" >
     update config_propertity
     set app_id = #{appId,jdbcType=BIGINT},
       env_id = #{envId,jdbcType=BIGINT},

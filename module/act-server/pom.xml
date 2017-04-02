@@ -92,8 +92,8 @@
     </dependencies>
 
     <build>
-        <finalName>xpring-server</finalName>
-
+        <finalName>act</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>
                 <!-- resources目录下的所有文件都进行过滤 -->
@@ -109,6 +109,14 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
 
         <plugins>
             <!--<plugin>

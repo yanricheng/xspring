@@ -4,15 +4,15 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
     <bean id="logBeforeAdvice"
-          class="net.yanrc.xpring.web.biz.service.demo.LogBeforeAdvice"/>
+          class="net.yanrc.xpring.activity.web.biz.service.demo.LogBeforeAdvice"/>
 
     <bean id="helloSpeaker"
-          class="net.yanrc.xpring.web.biz.service.demo.HelloSpeaker"/>
+          class="net.yanrc.xpring.activity.web.biz.service.demo.HelloSpeaker"/>
 
     <bean id="helloSpeakerBean"
           class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="proxyInterfaces">
-            <value>net.yanrc.xpring.web.biz.service.demo.IHello</value>
+            <value>net.yanrc.xpring.activity.web.biz.service.demo.IHello</value>
         </property>
         <property name="target">
             <ref bean="helloSpeaker"/>
@@ -26,10 +26,10 @@
 
 
    <!-- <bean id="someService"
-          class="net.yanrc.xpring.web.biz.service.demo.Some"/>
+          claSomeSome"/>
 
     <bean id="otherIntroduction"
-          class="net.yanrc.xpring.web.biz.service.demo.OtherIntroduction"/>
+          claOtherIntroductiontion"/>
 
     <bean id="otherAdvisor"
           class="org.springframework.aop.support.DefaultIntroductionAdvisor">
@@ -37,7 +37,7 @@
             <ref bean="otherIntroduction"/>
         </constructor-arg>
         <constructor-arg index="1">
-            <value>net.yanrc.xpring.web.biz.service.demo.IOther</value>
+            <vaIOtherther</value>
         </constructor-arg>
     </bean>
 
@@ -56,7 +56,7 @@
     <!--<bean id="proxyFactoryBean"
           class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="proxyInterfaces">
-            <value>net.yanrc.xpring.web.biz.service.demo.ISome</value>
+            <vaISomeSome</value>
         </property>
         <property name="target">
             <ref bean="some"/>

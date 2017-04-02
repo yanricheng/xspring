@@ -24,9 +24,9 @@
 
     <context:property-placeholder location="classpath:spring.properties"/>
 
-    <context:component-scan base-package="net.yanrc.xpring.rpc.manger"/>
-    <context:component-scan base-package="net.yanrc.xpring.rpc.service"/>
-    <context:component-scan base-package="net.yanrc.xpring.web.controller"/>
+    <context:component-scan base-package="net.yanrc.xpring.activity.biz.manger"/>
+    <context:component-scan base-package="net.yanrc.xpring.activity.biz.service"/>
+    <context:component-scan base-package="net.yanrc.xpring.activity.web.controller"/>
     <context:annotation-config/>
 
 
@@ -34,12 +34,12 @@
     <dubbo:registry address="${dubbo.registry}" /> <!--client="curator"-->
     <dubbo:protocol name="dubbo"  port="${dubbo.port}" threadpool="fixed" threads="200"/>
     <dubbo:service ref="activityService" version="1.0.0"  timeout="30000"
-                   interface="net.yanrc.xpring.rpc.service.ActivityService"/>
-    <bean id="activityService" class="net.yanrc.xpring.rpc.service.impl.ActivityServiceImpl"/>
+                   interface="net.yanrc.xpring.activity.biz.service.ActivityService"/>
+    <bean id="activityService" class="net.yanrc.xpring.activity.biz.service.impl.ActivityServiceImpl"/>
 
     <!-- 通用缓存处理-->
     <cache:annotation-driven  error-handler="errorHandler"/>
-    <bean id="errorHandler" class="net.yanrc.xpring.common.utils.cache.FixedCacheErrorHandler" />
+    <bean id="errorHandler" class="net.yanrc.xpring.activity.common.utils.cache.FixedCacheErrorHandler" />
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
         <property name="usePrefix" value="true" />
@@ -136,7 +136,7 @@
 
     <!-- 将mybatis 的mapper实例纳入到spring bean管理 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="net.yanrc.xpring.dal.mapper"/>
+        <property name="basePackage" value="net.yanrc.xpring.activity.dal.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
@@ -200,14 +200,14 @@
         </property>
     </bean>
 
-    <bean id="systemIntroduction" class="net.yanrc.xpring.common.utils.sys.SystemIntroduction"/>
+    <bean id="systemIntroduction" class="net.yanrc.xpring.activity.common.utils.sys.SystemIntroduction"/>
     <bean id="systemAdvisor"
           class="org.springframework.aop.support.DefaultIntroductionAdvisor">
         <constructor-arg index="0">
             <ref bean="systemIntroduction"/>
         </constructor-arg>
         <constructor-arg index="1">
-            <value>net.yanrc.xpring.common.utils.sys.SystemService</value>
+            <value>net.yanrc.xpring.activity.common.utils.sys.SystemService</value>
         </constructor-arg>
     </bean>
 

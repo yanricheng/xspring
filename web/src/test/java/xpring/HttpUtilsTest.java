@@ -6,18 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 
-import net.yanrc.xpring.common.utils.http.HttpRequestType;
-import net.yanrc.xpring.common.utils.http.SimpleHttpRequest;
+import net.yanrc.xpring.activity.common.utils.http.HttpRequestType;
+import net.yanrc.xpring.activity.common.utils.http.SimpleHttpRequest;
 import org.apache.commons.io.IOUtils;
 
 import com.google.common.collect.Lists;
-
-import net.yanrc.xpring.common.utils.http.HttpUtils;
 
 public class HttpUtilsTest {
 
