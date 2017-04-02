@@ -1,11 +1,14 @@
 package net.yanrc.xpring.activity.dal.mapper;
 
+import java.util.List;
+
 import net.yanrc.xpring.activity.common.utils.anots.Logable;
 import net.yanrc.xpring.activity.domain.Activity;
 
-import java.util.List;
 public interface ActivityMapper {
     int deleteByPrimaryKey(Integer id);
+
+    int deleteByPrimaryKeyNotSafe(String id);
 
     int insert(Activity record);
 

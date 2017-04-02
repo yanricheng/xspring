@@ -121,6 +121,11 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
+    <delete id="deleteByPrimaryKeyNotSafe" parameterType="java.lang.String">
+        delete from activity
+        where id = #{id}
+    </delete>
+
 
     <update id="updateByPrimaryKeySelective" parameterType="net.yanrc.xpring.activity.domain.Activity">
         update activity
