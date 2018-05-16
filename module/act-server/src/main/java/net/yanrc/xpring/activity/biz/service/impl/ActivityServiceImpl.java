@@ -1,14 +1,13 @@
 package net.yanrc.xpring.activity.biz.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-
 import net.yanrc.app.common.result.DefaultResult;
 import net.yanrc.app.common.result.Result;
-import net.yanrc.xpring.activity.domain.Activity;
 import net.yanrc.xpring.activity.biz.manger.ActivityManager;
 import net.yanrc.xpring.activity.biz.model.ActivityModel;
 import net.yanrc.xpring.activity.biz.service.ActivityService;
+import net.yanrc.xpring.activity.domain.Activity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Administrator on 2016/10/13.
@@ -19,7 +18,7 @@ public class ActivityServiceImpl implements ActivityService {
     private ActivityManager activityManager;
 
     @Override
-    public Result<ActivityModel> addSelective(ActivityModel model){
+    public Result<ActivityModel> addSelective(ActivityModel model) {
         Activity activityInDb = activityManager.addSelective(Activity.buildFromModel(model));
         if (activityInDb != null) {
             return new DefaultResult<ActivityModel>(activityInDb.buildToModel());

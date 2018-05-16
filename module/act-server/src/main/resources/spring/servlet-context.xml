@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:cache="http://www.springframework.org/schema/cache"
-       xmlns:beans="http://www.springframework.org/schema/util"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+
+
+
+
      http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
      http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
@@ -31,18 +26,18 @@
 
 
     <dubbo:application name="act-server"/>
-    <dubbo:registry address="${dubbo.registry}" /> <!--client="curator"-->
-    <dubbo:protocol name="dubbo"  port="${dubbo.port}" threadpool="fixed" threads="200"/>
-    <dubbo:service ref="activityService" version="1.0.0"  timeout="30000"
+    <dubbo:registry address="${dubbo.registry}"/> <!--client="curator"-->
+    <dubbo:protocol name="dubbo" port="${dubbo.port}" threadpool="fixed" threads="200"/>
+    <dubbo:service ref="activityService" version="1.0.0" timeout="30000"
                    interface="net.yanrc.xpring.activity.biz.service.ActivityService"/>
     <bean id="activityService" class="net.yanrc.xpring.activity.biz.service.impl.ActivityServiceImpl"/>
 
     <!-- 通用缓存处理-->
-    <cache:annotation-driven  error-handler="errorHandler"/>
-    <bean id="errorHandler" class="net.yanrc.xpring.activity.common.utils.cache.FixedCacheErrorHandler" />
+    <cache:annotation-driven error-handler="errorHandler"/>
+    <bean id="errorHandler" class="net.yanrc.xpring.activity.common.utils.cache.FixedCacheErrorHandler"/>
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
-        <property name="usePrefix" value="true" />
+        <property name="usePrefix" value="true"/>
         <property name="defaultExpiration" value="216000"/><!-- 1小时 -->
         <property name="expires">
             <map>
